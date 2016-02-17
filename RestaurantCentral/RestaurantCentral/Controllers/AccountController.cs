@@ -9,9 +9,20 @@ using RestaurantCentral.Models;
 
 namespace RestaurantCentral.Controllers
 {
+
+    [RequireHttps]
     public class AccountController : Controller
     {
 
+        public IFormsAuthenticationService FormsService { get; set; }
+        public IMembershipService MembershipService { get; set; }
+
+        protected override void Initialize(RequestContext requestContext)
+        {
+            if (FormsService == null) { FormsService = new FormsAuthenticationService(); }
+            if (MembershipService == null) { MembershipService = new AccountMembershipService(); }
+            base.Initialize(requestContext);
+        }
         //
         // GET: /Account/LogOn
 
@@ -22,9 +33,40 @@ namespace RestaurantCentral.Controllers
 
         //
         // POST: /Account/LogOn
-
+        /// <summary>
+        /// Wrapper around Membership object - MembershipService
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="returnUrl"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult LogOn(LogOnModel model, string returnUrl)
+        {
+            if (ModelState.IsValid)
+            {
+                if (MembershipService.ValidateUser(model.UserName, model.Password))
+                {
+                    FormsService.SignIn(model.UserName, model.RememberMe);
+                    if (Url.IsLocalUrl(returnUrl))
+                    {
+                        return Redirect(returnUrl);
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("", "The user name or password provided is incorrect.");
+                }
+            }
+            return View(model);
+        }
+
+
+        [HttpPost]
+        public ActionResult LogOnOriginal(LogOnModel model, string returnUrl)
         {
             if (ModelState.IsValid)
             {
@@ -69,11 +111,41 @@ namespace RestaurantCentral.Controllers
             return View();
         }
 
+
+        /// <summary>
+        /// Custom method. Validation
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult Register(RegisterModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                // Attempt to register the user
+                MembershipCreateStatus createStatus = MembershipService.CreateUser(model.UserName, model.Password, model.Email);
+
+                if (createStatus == MembershipCreateStatus.Success)
+                {
+                    FormsService.SignIn(model.UserName, false /* createPersistentCookie */);
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    ModelState.AddModelError("", AccountValidation.ErrorCodeToString(createStatus));
+                }
+            }
+
+            // If we got this far, something failed, redisplay form
+            ViewBag.PasswordLength = MembershipService.MinPasswordLength;
+            return View(model);
+        }
+
         //
         // POST: /Account/Register
 
         [HttpPost]
-        public ActionResult Register(RegisterModel model)
+        public ActionResult RegisterOriginal(RegisterModel model)
         {
             if (ModelState.IsValid)
             {

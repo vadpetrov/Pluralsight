@@ -6,12 +6,18 @@ using System.Web.Mvc;
 using RestaurantCentral.Queries;
 using RestaurantCentral.Models;
 using System.Threading;
+using System.Data;
+using System.Data.SqlClient;
+using System.Configuration;
 
 namespace RestaurantCentral.Controllers
 {
+    //[Authorize(Users="poonam,tim,vp")]//authorize by username
+    //[Authorize(Roles="users")]
     public class HomeController : Controller
     {
         RCDB _db = new RCDB();
+
 
         public ActionResult Index()
         {
@@ -22,7 +28,32 @@ namespace RestaurantCentral.Controllers
 
         public ActionResult About()
         {
-            return View();
+            DataTable dt = new DataTable("restaurants");
+
+            using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["RCDB"].ConnectionString))
+            {
+                using (var command = new SqlCommand("select * from Restaurants a", connection))
+                {
+                    command.CommandType = CommandType.Text;
+                    command.CommandTimeout = 0;
+                    connection.Open();
+                    using (var da = new SqlDataAdapter(command))
+                    {
+                        da.Fill(dt);
+                    }
+                    //IEnumerable<IDataRecord> idr = GetData(command);
+                    //var reader = command. .ExecuteReader();//.Cast<IDataRecord>();
+                    //reader.to
+                    //MemoryStream ms = new MemoryStream();
+                    //foreach (IDataRecord record in idr)
+                    //{
+                    //    ms.Write(record,);
+                    //}
+                }
+            }
+
+            //var dt = new DataTable("deals");
+            return View(dt);
         }
 
         public PartialViewResult LatestReview()

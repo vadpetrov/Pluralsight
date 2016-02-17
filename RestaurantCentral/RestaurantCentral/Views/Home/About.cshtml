@@ -1,8 +1,39 @@
-﻿@{
+﻿@model System.Data.DataTable
+@using System.Data
+
+@{
     ViewBag.Title = "About Us";
 }
 
 <h2>About</h2>
 <p>
-     Put content here.
+    <li>1. No Entity Framework</li>
+    <li>2. DataTable as Model</li>
 </p>
+<div>
+    @Model.Rows.Count
+    @Model.TableName
+
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>City</th>
+            <th>State</th>
+        </tr>
+        @foreach (DataRow item in Model.Rows)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink(@item["Name"].ToString(),"Details","Restaurant",new {id=@item["ID"].ToString()}, null)
+                </td>
+                <td>
+                    @item["City"].ToString()
+                </td>
+                <td>
+                    @item["State"].ToString()
+                </td>
+            </tr>
+        }
+    </table>
+
+</div>

@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace RestaurantCentral.Models
 {
@@ -18,6 +19,7 @@ namespace RestaurantCentral.Models
 
         [Required]
         [DataType(DataType.MultilineText)]
+        [AllowHtml]
         public virtual string Body { get; set; }
 
 
@@ -26,7 +28,7 @@ namespace RestaurantCentral.Models
         [DataType(DataType.Date)]
         public virtual DateTime DiningDate { get; set; }
         
-        public virtual DateTime Created { get; set; }
+        public virtual DateTime? Created { get; set; }
 
         public virtual Restaurant Restaurant { get; set; }
 

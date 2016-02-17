@@ -1,10 +1,12 @@
-﻿using RestaurantCentral.Queries;
+﻿using System.Data;
+using RestaurantCentral.Queries;
 using RestaurantCentral.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.Security.Application;
 
 namespace RestaurantCentral.Controllers
 {
@@ -49,25 +51,42 @@ namespace RestaurantCentral.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        //public ActionResult Edit(int id, Review r)
+        //[ValidateInput(false)]
+        //public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, Review review)
+        //public ActionResult Edit(Review review)
         {
-            /*
-            var review = _db.Reviews.FindById(id);
-            review.Body = r.Body;
-            review.Rating = r.Rating;
-            review.DiningDate = r.DiningDate;
-            _db.SaveChanges();
-            return RedirectToAction("Index");
-            */
+            //if (ModelState.IsValid)
+            //{
+            //    review.Created = DateTime.Now;
+            //    _db.Entry(review).State = EntityState.Modified;
+            //    _db.SaveChanges();
+            //    return RedirectToAction("Index");
+            //}
+            //return View(review);
 
+            if (ModelState.IsValid)
+            {
+                var item = _db.Reviews.FindById(id);
+                item.Body = Sanitizer.GetSafeHtmlFragment(review.Body);
+                item.Rating = review.Rating;
+                item.DiningDate = review.DiningDate;
+                _db.Entry(item).State = EntityState.Modified;
+                _db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(review);
+
+            /*
             var review = _db.Reviews.FindById(id);
             if (TryUpdateModel(review))
             {
                 _db.SaveChanges();
                 return RedirectToAction("Index");
             }
+             * 
             return View(review);
+            */
             /*
             try
             {

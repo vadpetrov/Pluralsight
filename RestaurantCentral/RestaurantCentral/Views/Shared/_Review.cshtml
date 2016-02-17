@@ -10,7 +10,8 @@
     <p>Dining Date: @Html.DisplayFor(model=>model.DiningDate)</p>
 
     <p>
-        @Model.Body
+        @*@Model.Body*@
+        @Html.Raw(Model.Body)
         <span class="right">
             @Html.ActionLink("Edit", "Edit","Review", new { id = Model.ID }, null)
         </span>

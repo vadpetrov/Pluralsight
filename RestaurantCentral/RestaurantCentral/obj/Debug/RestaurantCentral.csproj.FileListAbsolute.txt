@@ -19,3 +19,7 @@ D:\Projects\Pluralsight\RestaurantCentral\RestaurantCentral\bin\System.Web.WebPa
 D:\Projects\Pluralsight\RestaurantCentral\RestaurantCentral\obj\Debug\RestaurantCentral.dll
 D:\Projects\Pluralsight\RestaurantCentral\RestaurantCentral\obj\Debug\RestaurantCentral.pdb
 D:\Projects\Pluralsight\RestaurantCentral\RestaurantCentral\obj\Debug\RestaurantCentral.csprojResolveAssemblyReference.cache
+D:\Projects\Pluralsight\RestaurantCentral\RestaurantCentral\bin\AntiXssLibrary.dll
+D:\Projects\Pluralsight\RestaurantCentral\RestaurantCentral\bin\HtmlSanitizationLibrary.dll
+D:\Projects\Pluralsight\RestaurantCentral\RestaurantCentral\bin\AntiXssLibrary.xml
+D:\Projects\Pluralsight\RestaurantCentral\RestaurantCentral\bin\HtmlSanitizationLibrary.xml

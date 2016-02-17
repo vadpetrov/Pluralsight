@@ -44,6 +44,7 @@ namespace RestaurantCentral.Controllers
 
         }
 
+        [Authorize]
         public ActionResult Edit(int id)
         {
             var review = _db.Reviews.FindById(id);
@@ -51,6 +52,8 @@ namespace RestaurantCentral.Controllers
         }
 
         [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
         //[ValidateInput(false)]
         //public ActionResult Edit(int id, FormCollection collection)
         public ActionResult Edit(int id, Review review)

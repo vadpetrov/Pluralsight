@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable<RestaurantCentral.Models.Restaurant>
+@{
     ViewBag.Title = "Home Page";
 }
 <style type="text/css">
@@ -38,8 +39,22 @@
     }
 </style>
 
+<div>
+    <h2>ViewBag Message: @ViewBag.Message</h2>
 
-<h2>@ViewBag.Message</h2>
+    <h2>@RestaurantCentral.Views.Home.HomeResources.Greeting</h2>
+    @{
+        var amount = 10.0m;
+        var then = new DateTime(2002, 7, 9);
+    }
+    <div>
+        @amount.ToString("c")
+    </div>
+    <div>
+        @then.ToShortDateString()
+    </div>
+</div>
+
 <p>
     You are logged in as @User.Identity.Name
 </p>
@@ -50,22 +65,44 @@
     <br />
     @Html.LinkSimple("http://www.asp.net/ajax/cdn", "CDN Resourses")
 </p>
-<!--
-<div style="float: left;border:0.5pt solid green;width:49%;clear:left;">left</div>
 
-<div style="float: right;border:0.5pt solid blue;width:49%;clear:right;">right</div>
--->
+
+<p>Index rendered @DateTime.Now.ToLongTimeString()</p>
+@Html.Action("ChildAction")
+
+
+<div style="border: 0.5pt solid black;">
+    @using (Html.BeginForm("Index", "Home", FormMethod.Get))
+    {
+        <input name="q" type="text" />
+        <input type="submit" value="Search Simple" />
+    }
+    <div id="searchResults002">
+        <table>
+            <thead>
+                <th>Name</th>
+                <th>Address</th>
+            </thead>
+            <tbody id="searchResults11">
+                @Html.Partial("_RestaurantSearchResults1", Model)
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
 <div>
     <div id="latestReview">
         @Ajax.ActionLink("Click here to see the latest review.",
-                     "LatestReview", new AjaxOptions()
-                         {
-                             UpdateTargetId = "latestReview",
-                             //InsertionMode = InsertionMode.InsertAfter,
-                             InsertionMode = InsertionMode.Replace,
-                             HttpMethod = "GET",
-                             LoadingElementId = "progress"
-                         })
+                         "LatestReview", new AjaxOptions()
+                             {
+                                 UpdateTargetId = "latestReview",
+                                 //InsertionMode = InsertionMode.InsertAfter,
+                                 InsertionMode = InsertionMode.Replace,
+                                 HttpMethod = "GET",
+                                 LoadingElementId = "progress"
+                             })
     </div>
 </div>
 

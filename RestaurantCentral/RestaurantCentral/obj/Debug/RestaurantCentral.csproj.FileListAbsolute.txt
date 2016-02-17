@@ -23,3 +23,8 @@ D:\Projects\Pluralsight\RestaurantCentral\RestaurantCentral\bin\AntiXssLibrary.d
 D:\Projects\Pluralsight\RestaurantCentral\RestaurantCentral\bin\HtmlSanitizationLibrary.dll
 D:\Projects\Pluralsight\RestaurantCentral\RestaurantCentral\bin\AntiXssLibrary.xml
 D:\Projects\Pluralsight\RestaurantCentral\RestaurantCentral\bin\HtmlSanitizationLibrary.xml
+D:\Projects\Pluralsight\RestaurantCentral\RestaurantCentral\bin\fr\RestaurantCentral.resources.dll
+D:\Projects\Pluralsight\RestaurantCentral\RestaurantCentral\obj\Debug\RestaurantCentral.Views.Home.HomeResources.resources
+D:\Projects\Pluralsight\RestaurantCentral\RestaurantCentral\obj\Debug\RestaurantCentral.Views.Home.HomeResources.fr.resources
+D:\Projects\Pluralsight\RestaurantCentral\RestaurantCentral\obj\Debug\RestaurantCentral.csproj.GenerateResource.Cache
+D:\Projects\Pluralsight\RestaurantCentral\RestaurantCentral\obj\Debug\fr\RestaurantCentral.resources.dll

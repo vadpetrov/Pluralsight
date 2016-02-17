@@ -18,6 +18,8 @@ namespace RestaurantCentral.Models
         public virtual int Rating { get; set; }
 
         [Required]
+        //[Required(ErrorMessage = "Reuired field")]
+        //[Required(ErrorMessageResourceType = typeof(Views.Home.HomeResources), ErrorMessageResourceName = "ReviewBodyErrorMessage")]
         [DataType(DataType.MultilineText)]
         [AllowHtml]
         public virtual string Body { get; set; }

@@ -18,14 +18,38 @@ namespace RestaurantCentral.Controllers
     {
         RCDB _db = new RCDB();
 
-
-        public ActionResult Index()
+        //[OutputCache(Duration = 60, VaryByParam = "q")]
+        [OutputCache(CacheProfile = "long", VaryByParam = "q", VaryByHeader = "Accept-Language")]
+        public ViewResult Index(string q)
         {
-            ViewBag.Message = "Welcome Restaurant Central.";
-
-            return View();
+            var restaurants = Enumerable.Empty<Restaurant>();
+            if (!String.IsNullOrEmpty(q))
+            {
+                restaurants = _db.Restaurants
+                                 .Where(r => r.Name.Contains(q))
+                                 .OrderBy(r => r.Name)
+                                 .Take(10);
+            }
+            ViewBag.Message = Views.Home.HomeResources.Greeting;
+            return View(restaurants);
         }
 
+        //[OutputCache(CacheProfile = "short", VaryByParam = "none")]
+        //[OutputCache(Duration = 10, VaryByParam = "none")]
+        [OutputCache(Duration = 10, VaryByParam = "*")]
+        public PartialViewResult ChildAction()
+        {
+            return PartialView();
+        }
+
+        //public ActionResult Index()
+        //{
+        //    ViewBag.Message = "Welcome Restaurant Central.";
+
+        //    return View(new List<Restaurant>());
+        //}
+        [Authorize]
+        [RequireHttps]
         public ActionResult About()
         {
             DataTable dt = new DataTable("restaurants");

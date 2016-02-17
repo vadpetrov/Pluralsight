@@ -119,6 +119,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Queries\ReviewQueries.cs" />
     <Compile Include="Queries\RestaurantQueries.cs" />
+    <Compile Include="Views\Home\HomeResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HomeResources.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\images\ajax-loader.gif" />
@@ -206,12 +211,21 @@
     <Content Include="Views\Home\_RestaurantSearchResults.cshtml" />
     <Content Include="Scripts\jquery-2.2.0.min.map" />
     <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
+    <Content Include="Views\Home\_RestaurantSearchResults1.cshtml" />
+    <Content Include="Views\Home\ChildAction.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Home\HomeResources.fr.resx" />
+    <EmbeddedResource Include="Views\Home\HomeResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>HomeResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

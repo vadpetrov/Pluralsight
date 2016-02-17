@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/themes/base/all.css")" rel="stylesheet" type="text/css" />
+    @*
+    @ScriptLoad("jquery-2.1.0.min.js")
+    @ScriptLoad("jquery.unobtrusive-ajax.min.js")
+    *@
+</head>
+<body>
+    <div class="page">
+        <div id="header">
+            <div id="title">
+                <img src="@Url.Content("~/Content/images/OdeToFood.png")" alt="Restaurant Central" />
+            </div>
+            <div id="logindisplay">
+                @Html.Partial("_LogOnPartial")
+            </div>
+            <div id="menucontainer">
+                <ul id="menu">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Restaurants", "Index", "Restaurant")</li>
+                    <li>@Html.ActionLink("Reviews", "Index", "Review")</li>
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                </ul>
+            </div>
+        </div>
+        <div id="main">
+            @RenderBody()
+        </div>
+        <div id="footer">
+            @RenderSection("Footer", false)
+        </div>
+    </div>
+
+    @Content.Script("jquery-2.2.0.min.js", Url)
+    @Content.Script("jquery.unobtrusive-ajax.min.js", Url)
+    @Content.Script("jquery-ui-1.11.4.min.js", Url)
+    @Content.Script("jQuery.tmpl.min.js", Url)
+    @Content.Script("rc.js", Url)
+    @RenderSection("scripts", false)
+</body>
+</html>
+
+
+
+@helper ScriptLoad(string scriptName)
+{
+    <!-- Custom local razor helper -->
+    
+    <script src="@Url.Content("~/Scripts/" + scriptName)" type="text/javascript"></script>
+}

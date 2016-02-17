@@ -1,0 +1,29 @@
+﻿@model OdeToFood.Models.RestaurantRow
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>RestaurantRow</legend>
+
+    <div class="display-label">Name</div>
+    <div class="display-field">@Model.Name</div>
+    
+    @Html.DisplayFor(model => model.Address)
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+<h2>Reviews</h2>
+
+@foreach (var review in Model.Reviews)
+{
+    @Html.Partial("_Review",review)
+}
+
+@Html.ActionLink("Create new review","Create","Reviews", new {restaurantID = Model.ID},null)

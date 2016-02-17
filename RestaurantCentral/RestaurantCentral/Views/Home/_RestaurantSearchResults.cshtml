@@ -1,0 +1,23 @@
+﻿@model IEnumerable<RestaurantCentral.Models.Restaurant>
+
+<table id="searchResults">
+    <tr>
+        <th>Name</th>
+        <th>City</th>
+        <th>State</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(item.Name,"Details","Restaurant",new {id=item.ID}, null)
+            </td>
+            <td>
+                @Html.DisplayFor(r => item.Address.City)
+            </td>
+            <td>
+                @Html.DisplayFor(r => item.Address.State)
+            </td>
+        </tr>
+    }
+</table>

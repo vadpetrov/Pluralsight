@@ -1,0 +1,49 @@
+﻿@model IEnumerable<RestaurantCentral.Models.Restaurant>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Restaurants - @Model.GetType().BaseType</h2>
+
+
+@using (Html.BeginForm("Index", "Restaurant", FormMethod.Get))
+{
+    var states = new SelectList(ViewBag.States);
+    
+    @Html.DropDownList("state", states,"-- All --",
+        new Dictionary<string, object>() { { "onchange", "form.submit();" } });
+}
+
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<table>
+    <tr>
+        <th>Name</th>
+        <th>City</th>
+        <th>State</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(item.Name,"Details","Restaurant",new {id=item.ID}, null)
+            </td>
+            <td>
+                @Html.DisplayFor(r => item.Address.City)
+            </td>
+            <td>
+                @Html.DisplayFor(r => item.Address.State)
+            </td>
+        </tr>
+    }
+</table>
+
+
+@section Footer
+{
+    <p>@DateTime.Now</p>
+}
+

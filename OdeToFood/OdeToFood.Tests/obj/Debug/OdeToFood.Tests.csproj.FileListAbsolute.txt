@@ -1,0 +1,13 @@
+D:\Projects\Pluralsight\OdeToFood\OdeToFood.Tests\obj\Debug\OdeToFood.Tests.csprojResolveAssemblyReference.cache
+D:\Projects\Pluralsight\OdeToFood\OdeToFood.Tests\bin\Debug\OdeToFood.Tests.dll
+D:\Projects\Pluralsight\OdeToFood\OdeToFood.Tests\bin\Debug\OdeToFood.Tests.pdb
+D:\Projects\Pluralsight\OdeToFood\OdeToFood.Tests\bin\Debug\nunit.framework.dll
+D:\Projects\Pluralsight\OdeToFood\OdeToFood.Tests\bin\Debug\nunit.mocks.dll
+D:\Projects\Pluralsight\OdeToFood\OdeToFood.Tests\bin\Debug\OdeToFood.dll
+D:\Projects\Pluralsight\OdeToFood\OdeToFood.Tests\bin\Debug\pnunit.framework.dll
+D:\Projects\Pluralsight\OdeToFood\OdeToFood.Tests\bin\Debug\OdeToFood.pdb
+D:\Projects\Pluralsight\OdeToFood\OdeToFood.Tests\bin\Debug\nunit.framework.xml
+D:\Projects\Pluralsight\OdeToFood\OdeToFood.Tests\obj\Debug\OdeToFood.Tests.dll
+D:\Projects\Pluralsight\OdeToFood\OdeToFood.Tests\obj\Debug\OdeToFood.Tests.pdb
+D:\Projects\Pluralsight\OdeToFood\OdeToFood.Tests\bin\Debug\EntityFramework.dll
+D:\Projects\Pluralsight\OdeToFood\OdeToFood.Tests\bin\Debug\EntityFramework.xml

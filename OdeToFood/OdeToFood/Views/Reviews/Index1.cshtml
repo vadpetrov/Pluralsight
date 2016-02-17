@@ -1,0 +1,62 @@
+﻿@*
+@using OdeToFood.Infrastructure
+
+Moved to Views web.config for common use
+*@
+
+@model IEnumerable<OdeToFood.Models.RestaurantReviews>
+
+@{
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Index";
+    //var first = Model.First();
+    
+}
+
+<h2>The Latest Reviews</h2>
+
+
+<!-- ============================================== -->
+
+<h1>Table 2</h1>
+<hr/>
+
+@foreach (var item in Model)
+{
+    @Html.Partial("_Review",item)
+}
+
+@*
+@foreach(var item in Model)
+{
+    <!--
+        <text>Review</text>
+    -->
+    @:Review this void main
+    <div class="review">
+        <h4>@item.Restaurant.Name</h4>
+        <!--
+            <img src="@item.Restaurant.ImageUrl" alt="@item.Restaurant.Name"/>
+            -->
+        @Html.Image(@item.Restaurant.ImageUrl,@item.Restaurant.Name)
+        <p>
+            <span>Rating: @item.Rating</span>
+        </p>
+        <p>
+            @item.Body
+            <span class="right">
+                @Html.ActionLink("Edit","Edit",new {id = item.ID})
+            </span>
+        </p>
+    </div>
+}
+*@
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+@section Footer
+{
+    <p>This is the Footer</p>
+}

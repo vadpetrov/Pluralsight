@@ -1,0 +1,60 @@
+﻿@model IEnumerable<OdeToFood.Models.RestaurantRow>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+@*
+//post
+@using (Html.BeginForm())
+{
+
+    @Html.DropDownList("state", new SelectList(ViewBag.States))
+    <input type ="submit" value ="Filter"/>
+}
+*@
+
+@*
+@using (Html.BeginForm("Index", "Restaurant", FormMethod.Get))
+{
+
+    @Html.DropDownList("state", new SelectList(ViewBag.States),
+    new Dictionary<string, object>(){{"onchange","form.submit();"}})
+    
+    <input type ="submit" value ="Filter"/>
+}
+*@
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Address
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.ActionLink(item.Name,"Details","Restaurant",new {id=item.ID}, null)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address.City), @Html.DisplayFor(modelItem => item.Address.State)
+            </td>
+        </tr>
+    }  
+
+</table>
+
+
+@*
+@Html.ActionLink("Show restaurants in MD","Index","Restaurant", new {state = "MD"}, null)
+*@

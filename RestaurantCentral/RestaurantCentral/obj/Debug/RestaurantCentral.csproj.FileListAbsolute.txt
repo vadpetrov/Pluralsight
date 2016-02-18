@@ -18,7 +18,6 @@ D:\Projects\Pluralsight\RestaurantCentral\RestaurantCentral\bin\System.Web.WebPa
 D:\Projects\Pluralsight\RestaurantCentral\RestaurantCentral\bin\System.Web.WebPages.Razor.xml
 D:\Projects\Pluralsight\RestaurantCentral\RestaurantCentral\obj\Debug\RestaurantCentral.dll
 D:\Projects\Pluralsight\RestaurantCentral\RestaurantCentral\obj\Debug\RestaurantCentral.pdb
-D:\Projects\Pluralsight\RestaurantCentral\RestaurantCentral\obj\Debug\RestaurantCentral.csprojResolveAssemblyReference.cache
 D:\Projects\Pluralsight\RestaurantCentral\RestaurantCentral\bin\AntiXssLibrary.dll
 D:\Projects\Pluralsight\RestaurantCentral\RestaurantCentral\bin\HtmlSanitizationLibrary.dll
 D:\Projects\Pluralsight\RestaurantCentral\RestaurantCentral\bin\AntiXssLibrary.xml
@@ -28,3 +27,7 @@ D:\Projects\Pluralsight\RestaurantCentral\RestaurantCentral\obj\Debug\Restaurant
 D:\Projects\Pluralsight\RestaurantCentral\RestaurantCentral\obj\Debug\RestaurantCentral.Views.Home.HomeResources.fr.resources
 D:\Projects\Pluralsight\RestaurantCentral\RestaurantCentral\obj\Debug\RestaurantCentral.csproj.GenerateResource.Cache
 D:\Projects\Pluralsight\RestaurantCentral\RestaurantCentral\obj\Debug\fr\RestaurantCentral.resources.dll
+D:\Projects\Pluralsight\RestaurantCentral\RestaurantCentral\bin\StructureMap.dll
+D:\Projects\Pluralsight\RestaurantCentral\RestaurantCentral\bin\WebActivator.dll
+D:\Projects\Pluralsight\RestaurantCentral\RestaurantCentral\bin\StructureMap.pdb
+D:\Projects\Pluralsight\RestaurantCentral\RestaurantCentral\bin\StructureMap.xml

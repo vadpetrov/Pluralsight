@@ -29,6 +29,8 @@
         <legend>Review for @Model.Restaurant.Name</legend>
 
         @Html.HiddenFor(model => model.ID)
+        @Html.HiddenFor(model => model.RestaurantID)
+        @Html.HiddenFor(model => model.Created)
         
         @*
         <div class="editor-label">

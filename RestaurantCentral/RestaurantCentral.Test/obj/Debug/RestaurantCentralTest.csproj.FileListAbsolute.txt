@@ -1,0 +1,8 @@
+D:\Projects\Pluralsight\RestaurantCentral\RestaurantCentralTest\bin\Debug\RestaurantCentralTest.dll
+D:\Projects\Pluralsight\RestaurantCentral\RestaurantCentralTest\bin\Debug\RestaurantCentralTest.pdb
+D:\Projects\Pluralsight\RestaurantCentral\RestaurantCentralTest\bin\Debug\nunit.framework.dll
+D:\Projects\Pluralsight\RestaurantCentral\RestaurantCentralTest\bin\Debug\nunit.mocks.dll
+D:\Projects\Pluralsight\RestaurantCentral\RestaurantCentralTest\bin\Debug\nunit.framework.xml
+D:\Projects\Pluralsight\RestaurantCentral\RestaurantCentralTest\obj\Debug\RestaurantCentralTest.csprojResolveAssemblyReference.cache
+D:\Projects\Pluralsight\RestaurantCentral\RestaurantCentralTest\obj\Debug\RestaurantCentralTest.dll
+D:\Projects\Pluralsight\RestaurantCentral\RestaurantCentralTest\obj\Debug\RestaurantCentralTest.pdb

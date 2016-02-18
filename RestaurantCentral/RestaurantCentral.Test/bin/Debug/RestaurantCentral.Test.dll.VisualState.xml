@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<VisualState xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ShowCheckBoxes="false">
+  <TopNode>[0-1009]D:\Projects\Pluralsight\RestaurantCentral\RestaurantCentral.Test\bin\Debug\RestaurantCentral.Test.dll</TopNode>
+  <SelectedNode>[0-1009]D:\Projects\Pluralsight\RestaurantCentral\RestaurantCentral.Test\bin\Debug\RestaurantCentral.Test.dll</SelectedNode>
+  <ExcludeCategories>false</ExcludeCategories>
+  <Nodes>
+    <Node UniqueName="[0-1009]D:\Projects\Pluralsight\RestaurantCentral\RestaurantCentral.Test\bin\Debug\RestaurantCentral.Test.dll" Expanded="true" />
+    <Node UniqueName="[0-1010]RestaurantCentral" Expanded="true" />
+    <Node UniqueName="[0-1011]RestaurantCentral.Test" Expanded="true" />
+    <Node UniqueName="[0-1012]RestaurantCentral.Test.ReviewTests" Expanded="true" />
+    <Node UniqueName="[0-1005]RestaurantCentral.Test.ReviewTests.ReviewsControllerTests" Expanded="true" />
+    <Node UniqueName="[0-1000]RestaurantCentral.Test.ReviewTests.TestClass" Expanded="true" />
+  </Nodes>
+</VisualState>

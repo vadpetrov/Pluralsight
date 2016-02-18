@@ -9,12 +9,13 @@ using System.Web.Mvc;
 
 namespace RestaurantCentral.Models
 {
-    public class Review: IValidatableObject
+    public class Review : IValidatableObject
     {
         public virtual int ID { get; set; }
         public virtual int RestaurantID { get; set; }
+     
 
-        [Range(1,10)]
+        [Range(1, 10)]
         public virtual int Rating { get; set; }
 
         [Required]
@@ -25,26 +26,41 @@ namespace RestaurantCentral.Models
         public virtual string Body { get; set; }
 
 
+        [Required]
         [DisplayName("Dining Date")]
-        [DisplayFormat(DataFormatString ="{0:d}",ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:d}", ApplyFormatInEditMode = true)]
         [DataType(DataType.Date)]
         public virtual DateTime DiningDate { get; set; }
-        
+
         public virtual DateTime? Created { get; set; }
 
         public virtual Restaurant Restaurant { get; set; }
 
+
+        public Review()
+        {
+            InitRestaurant();
+        }
+
+        public void InitRestaurant()
+        {
+            if (Restaurant == null && RestaurantID != 0)
+            {
+                Restaurant = new RCDB().Restaurants.Where(r => r.ID == RestaurantID).Single();
+            }
+        }
+
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            var field = new[] {"DiningDate"};
+            var field = new[] { "DiningDate" };
 
             if (DiningDate > DateTime.Now)
             {
-                yield return  new ValidationResult("Dining date can not be in the future.",field);
+                yield return new ValidationResult("Dining date can not be in the future.", field);
             }
             if (DiningDate < DateTime.Now.AddYears(-2))
             {
-                yield return new ValidationResult("Dining date can not be to far in the past.",field);
+                yield return new ValidationResult("Dining date can not be to far in the past.", field);
             }
         }
     }

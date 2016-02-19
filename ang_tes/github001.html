@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html ng-app="githubViewer">
+<head>
+    <script src="Scripts/angular.min.js"></script>
+    <!--
+    <script src="node_modules/angular/angular.min.js"></script>
+    -->
+    <link rel="stylesheet" href="style.css">
+    <script src="github002.js"></script>
+    <script src="github-service.js"></script>
+</head>
+
+<body ng-controller="MainController">
+
+    <h1>{{message}}</h1>
+
+
+    <div>{{error}}</div>
+    <div>
+        <pre>{{reason.data}}</pre>
+    </div>
+    
+    <div>
+        {{countdown}}
+        <form name="searchUser" ng-submit="search(username)">
+            <input type="search" required placeholder="Username to find" ng-model="username" />
+            <input type="submit" value="Search" />
+            <!--
+                <input type="submit" value="Search" ng-click="search(username);" />
+            -->
+        </form>
+    </div>
+
+    
+
+    <div ng-if="user != null" ng-show="user" ng-include="template_user_details"></div>
+
+    <div style="width:50%;height:400px;float:left;">
+        <img src="images/ang_filters001.png" height="300" width="500" />
+    </div>
+    <div style="width:50%;height:400px;float:right;">
+        <img src="images/ang_directives001.png" height="300" width="500" />
+    </div>
+    <div style="width:50%;height:400px;float:left;">
+        <img src="images/ang_services001.png" height="300" width="500" />
+    </div>
+
+</body>
+
+</html>

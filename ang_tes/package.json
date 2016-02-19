@@ -1,0 +1,9 @@
+{
+  "name": "ang_tes",
+  "private": true,
+  "dependencies": {
+    "angular": "~1.5"
+  },
+  "devDependencies": {
+  }
+}

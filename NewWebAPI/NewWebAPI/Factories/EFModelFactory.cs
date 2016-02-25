@@ -1,4 +1,5 @@
 ﻿using NewWebAPI.Models;
+using NewWebAPI.Queries;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,10 +12,12 @@ namespace NewWebAPI.Factories
     public class EFModelFactory
     {
         UrlHelper _urlHelper;
+        private IDbContext _repo;
 
-        public EFModelFactory(HttpRequestMessage request)
+        public EFModelFactory(HttpRequestMessage request, IDbContext repo)
         {
             _urlHelper = new UrlHelper(request);
+            _repo = repo;
         }
 
         public OrderModel Create(Order order)
@@ -64,8 +67,11 @@ namespace NewWebAPI.Factories
         {
             return new OrderItemModel()
                 {
+                    Url = ControllerUrl(item),
+                    OrderUrl = ControllerUrl(item.Order),
                     OrderID = item.OrderID,
                     ItemID = item.ItemID,
+                    ClientID = item.Order.Client.ID,
                     Product = Create(item.Product)
                 };
         }
@@ -74,6 +80,7 @@ namespace NewWebAPI.Factories
         {
             return new ProductModel()
                 {
+                    Url = ControllerUrl(product),
                     ID = product.ID,
                     Name = product.Name,
                     Description = product.Description,
@@ -103,6 +110,60 @@ namespace NewWebAPI.Factories
             };
         }
 
+        
+        public Product Parse(ProductModel model)
+        {
+            try
+            {
+                var entry = new Product();
+
+                if (model.ID != default(int))
+                {
+                    entry.ID = model.ID;
+                }
+
+                if (!string.IsNullOrEmpty(model.Name))
+                {
+                    entry.Name = model.Name;
+                }
+
+                if (model.Price != default(decimal))
+                {
+                    entry.Price = model.Price;
+                }
+                entry.Description = model.Description;
+                return entry;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+        public OrderItem Parse(OrderItemModel model)
+        {
+            try
+            {
+                var entry = new OrderItem();
+
+                if (model.ItemID != default(int))
+                {
+                    entry.ItemID = model.ItemID;
+                }
+                var uri = new Uri(model.OrderUrl);
+                var orderId = int.Parse(uri.Segments.Last());
+                var order = _repo.GetOrder(model.ClientID, orderId);
+                var product = _repo.GetProduct(entry.ItemID);
+                entry.OrderID = orderId;
+                entry.Order = order;
+                entry.Product = product;
+                return entry;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
         private string ControllerUrl(Review review)
         {
             return _urlHelper.Link("Reviews", new
@@ -119,5 +180,15 @@ namespace NewWebAPI.Factories
         {
             return _urlHelper.Link("Orders", new { orderid = order.ID });
         }
+        private string ControllerUrl(Product product)
+        {
+            return _urlHelper.Link("Products", new { id = product.ID });
+        }
+        private string ControllerUrl(OrderItem item)
+        {
+            return _urlHelper.Link("OrdersItems", new { orderid = item.Order.ID, id = item.ItemID });
+        }
+
+
     }
 }

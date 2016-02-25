@@ -1,12 +1,92 @@
 ﻿<div>
-        <a onclick="aa();">GTTT</a>
+    <div>
+        <a onclick="aa();">Get JSON</a>
+    </div>
+    <div>
+        <a onclick="bb();">DELETE ITEM</a>
+    </div>
+    
+    <div>
+        <a onclick="cc();">CREATE PRODUCT</a>
+    </div>
+    <div>
+        <a onclick="dd();">GET PRODUCT 3</a>
+    </div>    
+
+
     <script type="text/javascript">
-        function aa() 
-        {
+        function aa() {
             $.getJSON('http://localhost:18279/api/restaurants', function (data) {
                 console.log(data);
             });
         };
+
+        function bb() {
+
+            var url = "http://localhost:18279/api/client/orders/6/items/2";
+            $.ajax({
+                url: url,
+                type: "DELETE",
+                cache: false,
+                statusCode: {
+                    
+                    200: function (data) { console.log("GOOOD"); },
+                    404: function (data) { console.log(url + " ...not found."); },
+                    400: function (data) { console.log("BAD Request"); }
+                }
+            });
+        };
+
+        function dd() {
+            var url = "http://localhost:18279/api/products/3";
+            $.getJSON(url, function (data) {
+                console.log(data);
+            });
+        };
+
+        function cc() {
+
+            var productData = new product(0, "Product 5", 10.99, "Test Product 5");
+            var productJson = JSON.stringify(productData);
+            
+            var url = "http://localhost:18279/api/products";
+
+            $.ajax({
+                url: url,
+                type: "POST",
+                cache: false,
+                data: productJson,
+                contentType: 'application/json',
+                statusCode: {                    
+                    200: function(data) {
+                        console.log("GOOOD");
+                        console.log(data);
+                    },
+                    201: function(data) {
+                         console.log("CREATED");
+                          console.log(data);
+                    },
+                    404: function(data) { console.log(url + " ...not found."); },
+                    400: function(data) { console.log("BAD Request"); }
+                }
+            }).done(function(response) {
+                console.log("DONE");
+                console.log(response);
+            }).fail(function(response) {
+                console.log("FAIL");
+                console.log(response);
+            });
+        };
+
+        function product(id, name, price, description) {
+
+            this.id = id;
+            this.name = name;
+            this.price = price;
+            this.description = description;
+        }
+            
+
 
         //$(document).ready(function () {
 

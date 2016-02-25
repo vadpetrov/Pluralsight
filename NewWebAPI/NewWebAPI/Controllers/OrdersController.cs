@@ -26,14 +26,14 @@ namespace NewWebAPI.Controllers
             //var username = Thread.CurrentPrincipal.Identity.Name;
             var username = _identityService.CurrentUserName;
             IQueryable<Order> query;
-            
+
             if (orderDate == null)
             {
                 query = Repository.GetOrders(username);
             }
             else
             {
-                query = Repository.GetOrders(username,(DateTime)orderDate);
+                query = Repository.GetOrders(username, (DateTime)orderDate);
             }
             var results = query
                 .OrderByDescending(o => o.OrderDate)
@@ -43,16 +43,23 @@ namespace NewWebAPI.Controllers
             return results;
         }
 
-        public OrderModel Get(int orderid)
+        public HttpResponseMessage Get(int orderid)
         {
             var userid = _identityService.CurrentUserID;
-            var results = Repository.GetOrder(orderid);
+            var result = Repository.GetOrder(userid, orderid);
 
-            if (results.Client.ID == userid)
+            if (result == null)
             {
-                return ModelFactory.Create(results);
+                return Request.CreateResponse(HttpStatusCode.NotFound);
             }
-            return new OrderModel();
+
+            var order = ModelFactory.Create(result);
+            return Request.CreateResponse(HttpStatusCode.OK, order);
+        }
+
+        public object Post(int orderid, [FromBody]OrderModel model)
+        {
+            return null;
         }
     }
 }

@@ -80,14 +80,45 @@ namespace NewWebAPI.Queries
                        .Include("Client")
                        .Where(c => c.Client.ID == userId && c.OrderDate == orderDate);
         }
-        public static Order GetOrder(this IDbContext repo, int orderId)
+        public static Order GetOrder(this IDbContext repo, int userId, int orderId)
         {
             return repo.Orders
                        .Include("Items")
                        .Include("Items.Product")
                        .Include("Restaurant")
                        .Include("Client")
-                       .Where(c => c.ID == orderId)
+                       .Where(c => c.ID == orderId && c.Client.ID == userId)
+                       .SingleOrDefault();
+        }
+
+        public static IQueryable<OrderItem> GetOrderItems(this IDbContext repo, int userId, int orderId)
+        {
+            return repo.OrderItems
+                       .Include("Product")
+                       .Include("Order")
+                       .Include("Order.Client")
+                       .Where(oi => oi.Order.ClientID == userId && oi.Order.ID == orderId);
+        }
+        public static OrderItem GetOrderItem(this IDbContext repo, int userId, int orderId, int itemId)
+        {
+            return repo.OrderItems
+                       .Include("Product")
+                       .Include("Order")
+                       .Include("Order.Client")
+                       .Where(oi => oi.Order.ClientID == userId
+                                    && oi.Order.ID == orderId
+                                    && oi.ItemID == itemId)
+                       .SingleOrDefault();
+        }
+
+        public static IQueryable<Product> GetProducts(this IDbContext repo)
+        {
+            return repo.Products;
+        }
+        public static Product GetProduct(this IDbContext repo, int productId)
+        {
+            return repo.Products
+                       .Where(p => p.ID == productId)
                        .SingleOrDefault();
         }
 

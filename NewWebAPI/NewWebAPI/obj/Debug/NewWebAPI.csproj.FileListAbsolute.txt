@@ -76,3 +76,4 @@ D:\Projects\Pluralsight\NewWebAPI\NewWebAPI\bin\Microsoft.Practices.Unity.Regist
 D:\Projects\Pluralsight\NewWebAPI\NewWebAPI\bin\Microsoft.Practices.Unity.xml
 D:\Projects\Pluralsight\NewWebAPI\NewWebAPI\bin\Microsoft.Practices.Unity.Configuration.xml
 D:\Projects\Pluralsight\NewWebAPI\NewWebAPI\bin\Microsoft.Practices.Unity.RegistrationByConvention.xml
+D:\Projects\Pluralsight\NewWebAPI\NewWebAPI\obj\Debug\NewWebAPI.csprojResolveAssemblyReference.cache

@@ -40,7 +40,23 @@ namespace NewWebAPI.Models
                         .Property(r => r.Address.Country).HasColumnName("Country");
             modelBuilder.Entity<Restaurant>()
                         .Property(r => r.Address.State).HasColumnName("State");
+          
+            /*
+            //same as [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+            modelBuilder.Entity<Product>()
+                        .Property(p => p.AddDate)
+                        .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Computed);
+            */
 
+            /*
+            //same as [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+            modelBuilder.Entity<Product>()
+                        .Property(p => p.ID)
+                        .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+            */
+
+
+            
             /* complex key
             modelBuilder.Entity<OrderItem>()
                         .HasKey(k => new
@@ -57,6 +73,9 @@ namespace NewWebAPI.Models
                 .WithMany()
                 .HasForeignKey(i=>i.ItemID)
                 .WillCascadeOnDelete(false);
+
+
+            
 
 
             /*

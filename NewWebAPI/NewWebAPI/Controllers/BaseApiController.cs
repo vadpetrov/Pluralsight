@@ -34,7 +34,7 @@ namespace NewWebAPI.Controllers
             {
                 if (_modelFactory == null)
                 {
-                    _modelFactory = new EFModelFactory(this.Request);
+                    _modelFactory = new EFModelFactory(this.Request, Repository);
                 }
                 return _modelFactory;
             }

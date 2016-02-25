@@ -42,6 +42,17 @@ namespace NewWebAPI
                 routeTemplate: "api/client/orders/{orderid}",
                 defaults: new { controller = "orders", orderid = RouteParameter.Optional }
             );
+            config.Routes.MapHttpRoute(
+                name: "OrdersItems",
+                routeTemplate: "api/client/orders/{orderid}/items/{id}",
+                defaults: new { controller = "orderitems", id = RouteParameter.Optional }
+            );
+
+            config.Routes.MapHttpRoute(
+                name: "Products",
+                routeTemplate: "api/products/{id}",
+                defaults: new { controller = "products", id = RouteParameter.Optional }
+            );
 
 
             

@@ -17,7 +17,8 @@ namespace NewWebAPI.Models
         [Key]
         [Column(Order=1)]
         public int ItemID { get; set; }
-        
+
         public virtual Product Product { get; set; }
+        public virtual Order Order { get; set; }
     }
 }

@@ -20,14 +20,29 @@ namespace NewWebAPI.Controllers
             _identityService = identityService;
         }
 
-        public IEnumerable<OrderItemModel> Get(int orderid)
+        public HttpResponseMessage Get(int orderid)
         {
-            var userid = _identityService.CurrentUserID;
-            var results = Repository.GetOrderItems(userid, orderid)
-                                    .OrderByDescending(oi => oi.Product.Name)
-                                    .ToList()
-                                    .Select(oi => ModelFactory.Create(oi));
-            return results;
+            try
+            {
+
+
+                var userid = _identityService.CurrentUserID;
+
+                var order = Repository.GetOrder(userid, orderid);
+                if (order == null)
+                    return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Order not found");
+
+                var results = order.Items
+                                   .OrderByDescending(oi => oi.Product.Name)
+                                   .ToList()
+                                   .Select(oi => ModelFactory.Create(oi));
+
+                return Request.CreateResponse(HttpStatusCode.OK, results);
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex);
+            }
         }
         public HttpResponseMessage Get(int orderid, int id)
         {
@@ -43,6 +58,40 @@ namespace NewWebAPI.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, orderItem);
         }
 
+        //Put required full object for update
+        //Patch supports partial object update
+        
+        [HttpPut]
+        [HttpPatch]
+        public HttpResponseMessage Patch(int orderid, int  id, [FromBody] OrderItemModel model)
+        {
+            try
+            {
+                var entity = Repository.GetOrderItem(_identityService.CurrentUserID, orderid, id);
+                if (entity == null)
+                    return Request.CreateResponse(HttpStatusCode.NotFound);
+
+                var parsedValue = ModelFactory.Parse(model);
+                if (parsedValue == null)
+                    return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Could not read OrderItem entry in body.");
+                
+                if (entity.Quantity != parsedValue.Quantity)
+                {
+                    entity.Quantity = parsedValue.Quantity;
+                    if (Repository.SaveChanges() > 0)
+                    {
+                        //return Request.CreateResponse(HttpStatusCode.OK, ModelFactory.Create(entity));
+                        return Request.CreateResponse(HttpStatusCode.OK);
+                    }
+                }
+                return Request.CreateResponse(HttpStatusCode.BadRequest);
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex);
+            }
+        }
+        //suports any update types
         public HttpResponseMessage Post(int orderid, [FromBody]OrderItemModel model)
         {
             try
@@ -78,7 +127,6 @@ namespace NewWebAPI.Controllers
             catch (Exception ex)
             {
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex);
-
             }
         }
 

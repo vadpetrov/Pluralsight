@@ -16,7 +16,7 @@ namespace NewWebAPI.Controllers
         {
             
         }
-        
+        [ActionName("DefaultAction")]
         public IEnumerable<ProductModel> Get()
         {
             var results = Repository.GetProducts()
@@ -25,7 +25,7 @@ namespace NewWebAPI.Controllers
                                     .Select(p => ModelFactory.Create(p));
             return results;
         }
-
+        [ActionName("DefaultAction")]
         public HttpResponseMessage Get(int id)
         {
             var results = Repository.GetProduct(id);
@@ -37,6 +37,38 @@ namespace NewWebAPI.Controllers
 
             return Request.CreateResponse(HttpStatusCode.OK, product);
         }
+
+        #region Multiple gets
+        [HttpGet]
+        [ActionName("Investors")]
+        public object Investors(int id)
+        {
+            return "Investors " + id.ToString();
+        }
+
+        [HttpGet]
+        [ActionName("Investors")]
+        public object Investors(int id, int entityid)
+        {
+            return "Investors "  + id.ToString() + " - " + entityid.ToString();
+        }
+        //http://blog.appliedis.com/2013/03/25/web-api-mixing-traditional-verb-based-routing/
+
+
+        [HttpGet]
+        [ActionName("Deals")]
+        public object Deals(int id)
+        {
+            return "Deals " + id.ToString();
+        }
+
+        [HttpGet]
+        [ActionName("Deals")]
+        public object Deals(int id, int entityid)
+        {
+            return "Deals " + id.ToString() + " - " + entityid.ToString();
+        }
+        #endregion
 
         //public object Create([FromBody]ProductModel model)
 
@@ -69,7 +101,6 @@ namespace NewWebAPI.Controllers
             }
         }
         
-        //public object Put([FromBody]ProductModel model)
         public HttpResponseMessage Create([FromBody]ProductModel model)
         {
             try

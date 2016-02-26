@@ -46,6 +46,17 @@ namespace NewWebAPI.Areas.HelpPage
             return null;
         }
 
+        public virtual string GetDocumentation(HttpControllerDescriptor controllerDescriptor)
+        {
+            return "";
+        }
+
+        public virtual string GetResponseDocumentation(HttpActionDescriptor actionDescriptor)
+        {
+            return "";
+        }
+
+
         public virtual string GetDocumentation(HttpParameterDescriptor parameterDescriptor)
         {
             ReflectedHttpParameterDescriptor reflectedParameterDescriptor = parameterDescriptor as ReflectedHttpParameterDescriptor;

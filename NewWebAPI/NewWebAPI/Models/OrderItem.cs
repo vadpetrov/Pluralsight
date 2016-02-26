@@ -18,6 +18,8 @@ namespace NewWebAPI.Models
         [Column(Order=1)]
         public int ItemID { get; set; }
 
+        public int Quantity { get; set; }
+
         public virtual Product Product { get; set; }
         public virtual Order Order { get; set; }
     }

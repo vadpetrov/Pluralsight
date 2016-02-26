@@ -11,10 +11,120 @@
     </div>
     <div>
         <a onclick="dd();">GET PRODUCT 3</a>
-    </div>    
+    </div>
+    <div>
+        <a onclick="GetOrder(6);">GET ORDER</a>
+    </div>
+    
+    <div>
+        <a onclick="GetProductsCB1();">GET Products with CB</a>
+    </div>
 
 
     <script type="text/javascript">
+
+        function GetProductsCB1() {
+            
+            var apiUrl = "http://localhost:18279/api/products";
+
+            $.ajax({
+                url: apiUrl,
+                type: "GET",
+                cache: false,
+                contentType: "application/jsonp",
+                //datatype: "jsonp",
+                //jsonp:true,
+                jsonpCallback: "cb",
+                success:jsonpCallback,
+                statusCode: {                    
+                    200: function(data) {
+                        console.log("GOOOD");
+                        //console.log(data);
+                    },
+                    201: function(data) {
+                        console.log("CREATED");
+                        //console.log(data);
+                    },
+                    404: function(data) { console.log(url + " ...not found."); },
+                    400: function(data) { console.log("BAD Request"); }
+                }
+            }).done(function(response) {
+                console.log("DONE");
+                //console.log(response);
+            }).fail(function(response) {
+                console.log("FAIL");
+                console.log(response);
+            });
+        };
+        function jsonpCallback(data) {
+            console.log("CALLBACK")
+            console.log(data);
+        };
+
+        function GetOrder(orderId) {
+
+            var apiUrl = "http://localhost:18279/api/client/orders/" + orderId;
+
+            $.ajax({
+                url: apiUrl,
+                type: "GET",
+                cache: false,
+                contentType: 'application/json',
+                /*
+                statusCode: {
+                    200: function(data) {
+                        console.log("GOOOD");
+                        console.log(data);
+                    },
+                    201: function(data) {
+                        console.log("CREATED");
+                        console.log(data);
+                    },
+                    404: function(data) { console.log(url + " ...not found."); },
+                    400: function(data) { console.log("BAD Request"); }
+                } */
+            }).then(onOrder, onError);
+            //.then(getOrderItems1(orderId),onError)
+
+            function onOrder(data) {
+                console.log("GOOD ORDER")
+                console.log(data);
+                getOrderItems(data.orderID);
+            };
+            function onOrderItems(data) {
+                console.log("GOOD ORDER ITEMS")
+                console.log(data);
+            };
+            function onError(reason) {
+                console.log("Error");
+                console.log(reason);
+            };
+
+            function getOrderItems(orderId) {
+
+                var apiUrl = "http://localhost:18279/api/client/orders/" + orderId + "/items";
+
+                $.ajax({
+                    url: apiUrl,
+                    type: "GET",
+                    cache: false,
+                    contentType: 'application/json',
+                }).then(onOrderItems, onError);
+            };
+            function getOrderItems1(orderId) {
+
+                var apiUrl = "http://localhost:18279/api/client/orders/" + orderId + "/items";
+
+                $.ajax({
+                    url: apiUrl,
+                    type: "GET",
+                    cache: false,
+                    contentType: 'application/json',
+                }).then(onOrderItems, onError);
+            };
+        };
+
+
         function aa() {
             $.getJSON('http://localhost:18279/api/restaurants', function (data) {
                 console.log(data);
@@ -63,8 +173,8 @@
                         console.log(data);
                     },
                     201: function(data) {
-                         console.log("CREATED");
-                          console.log(data);
+                        console.log("CREATED");
+                        console.log(data);
                     },
                     404: function(data) { console.log(url + " ...not found."); },
                     400: function(data) { console.log("BAD Request"); }
@@ -84,11 +194,10 @@
             this.name = name;
             this.price = price;
             this.description = description;
-        }
-            
+        };
 
 
-        //$(document).ready(function () {
+    //$(document).ready(function () {
 
         //    $.ajax(
         //        {

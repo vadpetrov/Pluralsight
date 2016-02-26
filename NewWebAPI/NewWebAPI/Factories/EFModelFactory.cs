@@ -71,6 +71,7 @@ namespace NewWebAPI.Factories
                     OrderUrl = ControllerUrl(item.Order),
                     OrderID = item.OrderID,
                     ItemID = item.ItemID,
+                    Quantity = item.Quantity,
                     ClientID = item.Order.Client.ID,
                     Product = Create(item.Product)
                 };
@@ -145,17 +146,27 @@ namespace NewWebAPI.Factories
             {
                 var entry = new OrderItem();
 
-                if (model.ItemID != default(int))
+                //full object parsing
+                if (!string.IsNullOrWhiteSpace(model.OrderUrl))
                 {
-                    entry.ItemID = model.ItemID;
+                    if (model.ItemID != default(int))
+                    {
+                        entry.ItemID = model.ItemID;
+                    }
+
+                    var uri = new Uri(model.OrderUrl);
+                    var orderId = int.Parse(uri.Segments.Last());
+                    var order = _repo.GetOrder(model.ClientID, orderId);
+                    var product = _repo.GetProduct(entry.ItemID);
+                    entry.OrderID = orderId;
+                    entry.Order = order;
+                    entry.Product = product;
                 }
-                var uri = new Uri(model.OrderUrl);
-                var orderId = int.Parse(uri.Segments.Last());
-                var order = _repo.GetOrder(model.ClientID, orderId);
-                var product = _repo.GetProduct(entry.ItemID);
-                entry.OrderID = orderId;
-                entry.Order = order;
-                entry.Product = product;
+                //partial parsing
+                if (model.Quantity != default(int))
+                {
+                    entry.Quantity = model.Quantity;
+                }
                 return entry;
             }
             catch
@@ -190,5 +201,21 @@ namespace NewWebAPI.Factories
         }
 
 
+
+        public OrderSummaryModel CreateSummary(Order order)
+        {
+            return new OrderSummaryModel()
+                {
+                    OrderID = order.ID,
+                    OrderDate = order.OrderDate,
+                    Products = order.Items.Select(i=>CreateSummary(i)),
+                    TotalAmount = order.Items.Sum(i=>i.Product.Price * i.Quantity)
+                };
+        }
+
+        public KeyValuePair<string, decimal> CreateSummary(OrderItem item)
+        {
+            return new KeyValuePair<string, decimal>(item.Product.Name, item.Product.Price * item.Quantity);
+        }
     }
 }

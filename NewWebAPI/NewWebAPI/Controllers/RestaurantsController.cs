@@ -13,6 +13,8 @@ using NewWebAPI.Queries;
 using NewWebAPI.Factories;
 
 using System.Data.Entity;
+using System.Web.Http.Routing;
+using NewWebAPI.Filters;
 
 namespace NewWebAPI.Controllers
 {
@@ -24,7 +26,10 @@ namespace NewWebAPI.Controllers
 
         }
 
-        public IEnumerable<RestaurantModel> Get(bool includeReviews = true)
+        private const int PAGE_SIZE = 2;
+
+        
+        public object Get(bool includeReviews = true, int page = 1)
         {
             IQueryable<Restaurant> query;
 
@@ -35,14 +40,33 @@ namespace NewWebAPI.Controllers
             else
             {
                 query = Repository.GetAllRestaurants();
-
             }
-            var results = query.OrderBy(r => r.Name)
-                //.Take(2)
-                               .ToList()
-                               .Select(r => ModelFactory.Create(r));
 
-            return results;
+            var baseQuery = query.OrderBy(r => r.Name);
+            var totalCount = baseQuery.Count();
+            var totalPages = (int)Math.Ceiling((double) totalCount/PAGE_SIZE);
+
+            var helper = new UrlHelper(Request);
+
+            var prevUrl = page > 1 ? helper.Link("restaurants", new { includeReviews = includeReviews, page = page - 1 }) : "";
+
+            var nextUrl = page < totalPages ? helper.Link("restaurants", new { includeReviews = includeReviews, page = page + 1 }) : "";
+            
+
+            var results = baseQuery
+                .Skip(PAGE_SIZE*(page - 1))
+                .Take(PAGE_SIZE)
+                .ToList()
+                .Select(r => ModelFactory.Create(r));
+
+            return new
+                {
+                    TotalCount = totalCount,
+                    TotalPages = totalPages,
+                    PrevPageUrl = prevUrl.ToLower(),
+                    NextPageUrl = nextUrl.ToLower(),
+                    Results = results,
+                };
         }
 
         public RestaurantModel Get(int restaurantid)

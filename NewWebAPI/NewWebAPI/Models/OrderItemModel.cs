@@ -11,6 +11,7 @@ namespace NewWebAPI.Models
         public string OrderUrl { get; set; }
         public int OrderID { get; set; }
         public int ItemID { get; set; }
+        public int Quantity { get; set; }
         public int ClientID { get; set; }
         public ProductModel Product { get; set; }
 

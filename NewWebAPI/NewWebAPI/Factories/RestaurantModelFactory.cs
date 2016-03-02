@@ -26,7 +26,7 @@ namespace NewWebAPI.Factories
         {
             return new RestaurantModel()
                 {
-                    Url = RestaurantUrl(restaurant),
+                    //Url = RestaurantUrl(restaurant),
                     ID = restaurant.ID,
                     Name = restaurant.Name,
                     Created = restaurant.AddDate,
@@ -40,7 +40,7 @@ namespace NewWebAPI.Factories
         {
             return new RestaurantModel()
                 {
-                    Url = RestaurantUrl(restaurant),
+                    //Url = RestaurantUrl(restaurant),
                     ID = (int)restaurant["ID"],
                     Name = restaurant["Name"].ToString(),
                     Created = (DateTime)restaurant["AddDate"],

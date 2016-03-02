@@ -40,6 +40,12 @@ namespace NewWebAPI.Factories
             return new RestaurantModel()
             {
                 Url = ControllerUrl(restaurant),
+                Links = 
+                new List<LinkModel>()
+                    {
+                        CreateLink(_urlHelper.Link("Restaurants", new { restaurantid = restaurant.ID }),"self"),
+                        CreateLink(_urlHelper.Link("Reviews", new { restaurantid = restaurant.ID }), "newReviewEntry", "POST")
+                    },
                 ID = restaurant.ID,
                 Name = restaurant.Name,
                 Created = restaurant.AddDate,
@@ -47,6 +53,17 @@ namespace NewWebAPI.Factories
                 ImgUrl = "../../Content/images/restaurant.jpg",
                 Reviews = restaurant.Reviews.Select(rr => Create(rr))
             };
+        }
+
+        public LinkModel CreateLink(string href, string rel, string method = "GET", bool isTemplated = false)
+        {
+            return new LinkModel()
+                {
+                    Href = href,
+                    Rel = rel,
+                    Method = method,
+                    IsTemplated = isTemplated
+                };
         }
 
         public ReviewModel Create(Review review)
@@ -111,12 +128,49 @@ namespace NewWebAPI.Factories
             };
         }
 
+        public Restaurant Parse(RestaurantModel model)
+        {
+            try
+            {
+                var entry = new Restaurant();
+
+                var selfLink = model.Links.Where(l => l.Rel == "self").FirstOrDefault();
+
+                //if (!string.IsNullOrWhiteSpace(model.Url))
+                if(selfLink !=null && !string.IsNullOrWhiteSpace(selfLink.Href))
+                {
+                    //var uri = new Uri(model.Url);
+                    var uri = new Uri(selfLink.Href);
+                    entry.ID = int.Parse(uri.Segments.Last());
+                }
+                
+                if (model.ID != default(int))
+                {
+                    entry.ID = model.ID;
+                }
+
+                if (!string.IsNullOrEmpty(model.Name))
+                {
+                    entry.Name = model.Name;
+                }
+                entry.ImageUrl = model.ImgUrl;
+                entry.Address = model.Address;
+
+                return entry;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
         
         public Product Parse(ProductModel model)
         {
             try
             {
                 var entry = new Product();
+
 
                 if (model.ID != default(int))
                 {
@@ -191,10 +245,18 @@ namespace NewWebAPI.Factories
         {
             return _urlHelper.Link("Orders", new { orderid = order.ID });
         }
+
+
         private string ControllerUrl(Product product)
         {
             return _urlHelper.Link("Products", new { id = product.ID });
         }
+
+        private string ControllerUrl(Product product, string routName = "Products", int version = 1)
+        {
+            return _urlHelper.Link(routName, new { id = product.ID, v = version });
+        }
+
         private string ControllerUrl(OrderItem item)
         {
             return _urlHelper.Link("OrdersItems", new { orderid = item.Order.ID, id = item.ItemID });
@@ -216,6 +278,49 @@ namespace NewWebAPI.Factories
         public KeyValuePair<string, decimal> CreateSummary(OrderItem item)
         {
             return new KeyValuePair<string, decimal>(item.Product.Name, item.Product.Price * item.Quantity);
+        }
+
+        internal ProductV2Model Create2(Product product)
+        {
+            return new ProductV2Model()
+            {   
+                //Url = ControllerUrl(product,version:2),
+                Url = ControllerUrl(product),
+                ID = product.ID,
+                Name = product.Name,
+                Description = product.Description,
+                Price = product.Price,
+                Version = 2
+            };
+        }
+
+        internal Product Parse2(ProductV2Model model)
+        {
+            try
+            {
+                var entry = new Product();
+                
+                if (model.ID != default(int))
+                {
+                    entry.ID = model.ID;
+                }
+
+                if (!string.IsNullOrEmpty(model.Name))
+                {
+                    entry.Name = model.Name;
+                }
+
+                if (model.Price != default(decimal))
+                {
+                    entry.Price = model.Price;
+                }
+                entry.Description = model.Description;
+                return entry;
+            }
+            catch
+            {
+                return null;
+            }
         }
     }
 }

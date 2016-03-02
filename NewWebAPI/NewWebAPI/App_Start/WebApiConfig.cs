@@ -9,6 +9,12 @@ using System.Net.Http.Formatting;
 using System.Net.Http.Headers;
 using System.Web.Http;
 using WebApiContrib.Formatting.Jsonp;
+using System.Web.Http.Dispatcher;
+using NewWebAPI.Services;
+using CacheCow.Server;
+using CacheCow.Server.EntityTagStore.SqlServer;
+using System.Configuration;
+using NewWebAPI.Converters;
 
 //using Microsoft.Practices.Unity;
 //using Microsoft.Practices.Unity.Configuration;
@@ -75,11 +81,38 @@ namespace NewWebAPI
                     }
             );
 
+            //config.Routes.MapHttpRoute(
+            //    name: "Products",
+            //    routeTemplate: "api/products/{id}",
+            //    defaults: new
+            //    {
+            //        controller = "productsv2",
+            //        id = RouteParameter.Optional
+            //    }
+            //);
+
+
+
+            //using routing to version with URL
+            /*
             config.Routes.MapHttpRoute(
-                name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional }
+                name: "Products2",
+                routeTemplate: "api/v2/products/{id}",
+                defaults: new
+                {
+                    controller = "productsv2",
+                    id = RouteParameter.Optional
+                }
             );
+            */
+
+
+
+            //config.Routes.MapHttpRoute(
+            //    name: "DefaultApi",
+            //    routeTemplate: "api/{controller}/{id}",
+            //    defaults: new { id = RouteParameter.Optional }
+            //);
 
 
 
@@ -95,12 +128,17 @@ namespace NewWebAPI
 
             var jsonFormatter = config.Formatters.OfType<JsonMediaTypeFormatter>().FirstOrDefault();
             jsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            jsonFormatter.SerializerSettings.Converters.Add(new LinkModelConverter());
+
+            CreateMediaTypes(jsonFormatter);
 
             //Add support JSONP
             var jsonpformatter = new JsonpMediaTypeFormatter(jsonFormatter,"cb");
             config.Formatters.Insert(0,jsonpformatter);
 
             
+            //replace the Controller original configiration with custom config
+            config.Services.Replace(typeof(IHttpControllerSelector), new RCControllerSelector(config));
 
 
             //custom code
@@ -108,6 +146,17 @@ namespace NewWebAPI
 #if !DEBUG
             config.Filters.Add(new RequireHttpsAttribute());
 #endif
+
+
+            //Configure Caching/Etag support
+            var connString = ConfigurationManager.ConnectionStrings["RCDB"].ConnectionString;
+            var etagStore = new SqlServerEntityTagStore(connString);
+            //var cacheHandler = new CachingHandler(config);
+
+            var cacheHandler = new CachingHandler(config, etagStore);
+            cacheHandler.AddLastModifiedHeader = false;
+            //config.MessageHandlers.Add(cacheHandler);
+
 
 
             // Uncomment the following line of code to enable query support for actions with an IQueryable or IQueryable<T> return type.
@@ -118,6 +167,20 @@ namespace NewWebAPI
             // To disable tracing in your application, please comment out or remove the following line of code
             // For more information, refer to: http://www.asp.net/web-api
             config.EnableSystemDiagnosticsTracing();
+        }
+
+        private static void CreateMediaTypes(JsonMediaTypeFormatter jsonFormatter)
+        {
+            var mediaTypes = new string[]
+                {
+                    "application/vnd.nwa.product.v1+json",
+                    "application/vnd.nwa.product.v2+json"
+                };
+
+            foreach (var mediaType in mediaTypes)
+            {
+                jsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue(mediaType));
+            }
         }
     }
 }

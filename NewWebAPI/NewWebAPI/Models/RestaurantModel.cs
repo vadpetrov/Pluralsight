@@ -7,6 +7,8 @@ namespace NewWebAPI.Models
 {
     public class RestaurantModel
     {
+        public ICollection<LinkModel> Links { get; set; }
+
         public string Url { get; set; }
         public int ID { get; set; }
         public string Name { get; set; }

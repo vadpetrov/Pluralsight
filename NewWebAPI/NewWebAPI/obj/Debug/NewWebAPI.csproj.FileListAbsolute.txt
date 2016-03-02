@@ -79,3 +79,9 @@ D:\Projects\Pluralsight\NewWebAPI\NewWebAPI\bin\Microsoft.Practices.Unity.Regist
 D:\Projects\Pluralsight\NewWebAPI\NewWebAPI\obj\Debug\NewWebAPI.csprojResolveAssemblyReference.cache
 D:\Projects\Pluralsight\NewWebAPI\NewWebAPI\bin\WebApiContrib.Formatting.Jsonp.dll
 D:\Projects\Pluralsight\NewWebAPI\NewWebAPI\bin\WebApiContrib.Formatting.Jsonp.pdb
+D:\Projects\Pluralsight\NewWebAPI\NewWebAPI\bin\CacheCow.Common.dll
+D:\Projects\Pluralsight\NewWebAPI\NewWebAPI\bin\CacheCow.Server.dll
+D:\Projects\Pluralsight\NewWebAPI\NewWebAPI\bin\CacheCow.Common.xml
+D:\Projects\Pluralsight\NewWebAPI\NewWebAPI\bin\CacheCow.Server.xml
+D:\Projects\Pluralsight\NewWebAPI\NewWebAPI\bin\CacheCow.Server.EntityTagStore.SqlServer.dll
+D:\Projects\Pluralsight\NewWebAPI\NewWebAPI\bin\CacheCow.Server.EntityTagStore.SqlServer.xml

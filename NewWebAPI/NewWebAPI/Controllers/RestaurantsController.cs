@@ -48,10 +48,19 @@ namespace NewWebAPI.Controllers
 
             var helper = new UrlHelper(Request);
 
+            var links = new List<LinkModel>();
+
+            if (page > 1)
+                links.Add(ModelFactory.CreateLink(helper.Link("restaurants", new { page = page - 1 }), "prevPage"));
+            
+            if (page < totalPages)
+                links.Add(ModelFactory.CreateLink(helper.Link("restaurants", new { page = page + 1 }), "nextPage"));
+
+            /*
             var prevUrl = page > 1 ? helper.Link("restaurants", new { includeReviews = includeReviews, page = page - 1 }) : "";
 
             var nextUrl = page < totalPages ? helper.Link("restaurants", new { includeReviews = includeReviews, page = page + 1 }) : "";
-            
+            */
 
             var results = baseQuery
                 .Skip(PAGE_SIZE*(page - 1))
@@ -60,6 +69,15 @@ namespace NewWebAPI.Controllers
                 .Select(r => ModelFactory.Create(r));
 
             return new
+            {
+                TotalCount = totalCount,
+                TotalPages = totalPages,
+                Links   = links,
+                Results = results,
+            };
+
+            /*
+            return new
                 {
                     TotalCount = totalCount,
                     TotalPages = totalPages,
@@ -67,6 +85,7 @@ namespace NewWebAPI.Controllers
                     NextPageUrl = nextUrl.ToLower(),
                     Results = results,
                 };
+            */
         }
 
         public RestaurantModel Get(int restaurantid)

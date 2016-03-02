@@ -38,7 +38,11 @@ namespace NewWebAPI.Filters
                         }
                     }
 
-                    WebSecurity.InitializeDatabaseConnection("DefaultConnection", "UserProfile", "UserId", "UserName", autoCreateTables: true);
+                    if (WebSecurity.Initialized)
+                    {
+                        WebSecurity.InitializeDatabaseConnection("RCDB", "Users", "UserId",
+                                                                 "UserName", autoCreateTables: true);
+                    }
                 }
                 catch (Exception ex)
                 {

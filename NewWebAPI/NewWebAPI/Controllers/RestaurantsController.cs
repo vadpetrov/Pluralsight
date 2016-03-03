@@ -18,6 +18,7 @@ using NewWebAPI.Filters;
 
 namespace NewWebAPI.Controllers
 {
+    [RoutePrefix("api/rc/restaurants")]
     public class RestaurantsController : BaseApiController
     {
 
@@ -28,7 +29,8 @@ namespace NewWebAPI.Controllers
 
         private const int PAGE_SIZE = 2;
 
-        
+
+        [Route("", Name = "Restaurants")]
         public object Get(bool includeReviews = true, int page = 1)
         {
             IQueryable<Restaurant> query;
@@ -88,10 +90,12 @@ namespace NewWebAPI.Controllers
             */
         }
 
-        public RestaurantModel Get(int restaurantid)
+        [Route("{restaurantid:int}", Name = "Restaurant")]
+        //public RestaurantModel Get(int restaurantid)
+        public IHttpActionResult Get(int restaurantid)
         {
             var result = ModelFactory.Create(Repository.GetRestaurant(restaurantid));
-            return result;
+            return Versioned(result,"v2");
         }
 
         /*

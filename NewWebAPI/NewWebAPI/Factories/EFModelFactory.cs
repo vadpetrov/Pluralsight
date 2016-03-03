@@ -20,6 +20,12 @@ namespace NewWebAPI.Factories
             _repo = repo;
         }
 
+        public EFModelFactory(RCDB repo)
+        {
+            _urlHelper = new UrlHelper();
+            _repo = repo;
+        }
+
         public OrderModel Create(Order order)
         {
             return new OrderModel()
@@ -43,7 +49,10 @@ namespace NewWebAPI.Factories
                 Links = 
                 new List<LinkModel>()
                     {
-                        CreateLink(_urlHelper.Link("Restaurants", new { restaurantid = restaurant.ID }),"self"),
+                        //v1
+                        //CreateLink(_urlHelper.Link("Restaurants", new { restaurantid = restaurant.ID }),"self"),
+                        //v2
+                        CreateLink(_urlHelper.Link("Restaurant", new { restaurantid = restaurant.ID }),"self"),
                         CreateLink(_urlHelper.Link("Reviews", new { restaurantid = restaurant.ID }), "newReviewEntry", "POST")
                     },
                 ID = restaurant.ID,
@@ -239,7 +248,10 @@ namespace NewWebAPI.Factories
         }
         private string ControllerUrl(Restaurant restaurant)
         {
-            return _urlHelper.Link("Restaurants", new { restaurantid = restaurant.ID });
+            //v1
+            //return _urlHelper.Link("Restaurants", new { restaurantid = restaurant.ID });
+            //v2
+            return _urlHelper.Link("Restaurant", new { restaurantid = restaurant.ID });
         }
         private string ControllerUrl(Order order)
         {

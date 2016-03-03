@@ -25,12 +25,16 @@ namespace NewWebAPI.Services
 
             var routeData = request.GetRouteData();
 
-            var controllerName = routeData.Values["controller"].ToString();
+            var controllerName = (string)routeData.Values["controller"];
 
 
             HttpControllerDescriptor descriptor;
 
-            if (controllers.TryGetValue(controllerName, out descriptor))
+            if (string.IsNullOrWhiteSpace(controllerName))
+            {
+                return base.SelectController(request);
+            }
+            else if (controllers.TryGetValue(controllerName, out descriptor))
             {
                 //var version = "2";
                 //var version = GetVersionFromQueryString(request);
@@ -50,9 +54,6 @@ namespace NewWebAPI.Services
                 return descriptor;
             }
             return null;
-
-
-            //return base.SelectController(request);
         }
 
 

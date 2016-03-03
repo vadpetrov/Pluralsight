@@ -1,4 +1,5 @@
-﻿using NewWebAPI.Factories;
+﻿using NewWebAPI.ActionResults;
+using NewWebAPI.Factories;
 using NewWebAPI.Models;
 using System;
 using System.Collections.Generic;
@@ -40,6 +41,10 @@ namespace NewWebAPI.Controllers
             }
         }
 
+        protected IHttpActionResult Versioned<T>(T body, string version = "v1") where T : class
+        {
+            return new VersionedActionResult<T>(Request, version, body);
+        }
 
         /*
         protected RestaurantModelFactory RestaurantModelFactory

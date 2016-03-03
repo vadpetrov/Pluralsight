@@ -39,6 +39,11 @@ namespace NewWebAPI.Queries
                        .FirstOrDefault();
         }
 
+        public static IQueryable<Order> GetAllOrders(this IDbContext repo)
+        {
+            return repo.Orders;
+        }
+
         public static IQueryable<Order> GetOrders(this IDbContext repo, string userName)
         {
             return repo.Orders

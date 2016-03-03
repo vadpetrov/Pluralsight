@@ -1,4 +1,6 @@
-﻿<div>
+﻿@model IEnumerable<NewWebAPI.Models.Restaurant>
+
+<div>
     <div>
         <a onclick="aa();">Get JSON</a>
     </div>
@@ -148,10 +150,18 @@
         };
 
         function dd() {
-            var url = "http://localhost:18279/api/products/3";
-            $.getJSON(url, function (data) {
-                console.log(data);
-            });
+            try {
+
+
+                var url = "http://localhost:18279/api/products/3";
+                $.getJSON(url,
+                    function(data) {
+                        console.log(data);
+                    },function (er){console.log(er)});
+            }
+            catch(e) {
+                var a = 1;
+            }             
         };
 
         function cc() {
@@ -222,7 +232,6 @@
 
 </div>
 
-
 <div id="body">
     <section class="featured">
         <div class="content-wrapper">
@@ -268,3 +277,29 @@
         </ol>
     </section>
 </div>
+
+
+@section featured {
+  <section class="featured">
+    <div class="content-wrapper">
+    </div>
+  </section>
+}
+@foreach (var restuarant in Model)
+{
+  <div>ID: @restuarant.ID - @restuarant.Name</div>
+  <ul>
+    @foreach (var review in restuarant.Reviews)
+    {
+        <li>ID: @review.ID - Date: @review.DiningDate.ToShortDateString() - Ratting: @review.Rating
+            <ul style="list-style-type:square;">
+                <li>
+                    <div>
+                        @review.Body
+                    </div>
+                </li>
+            </ul>
+        </li>
+    }
+  </ul>
+}

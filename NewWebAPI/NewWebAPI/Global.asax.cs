@@ -18,7 +18,12 @@ namespace NewWebAPI
         {
             AreaRegistration.RegisterAllAreas();
 
-            WebApiConfig.Register(GlobalConfiguration.Configuration);
+            //v1
+            //WebApiConfig.Register(GlobalConfiguration.Configuration);
+
+            //v2
+            GlobalConfiguration.Configure(WebApiConfig.Register);
+
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);

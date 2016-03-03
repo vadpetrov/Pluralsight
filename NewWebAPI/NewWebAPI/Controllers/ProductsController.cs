@@ -25,6 +25,11 @@ namespace NewWebAPI.Controllers
                                     .Select(p => ModelFactory.Create(p));
             return results;
         }
+        /// <summary>
+        /// Get Product by id
+        /// </summary>
+        /// <param name="id">ProductID input param</param>
+        /// <returns></returns>
         [ActionName("DefaultAction")]
         public HttpResponseMessage Get(int id)
         {

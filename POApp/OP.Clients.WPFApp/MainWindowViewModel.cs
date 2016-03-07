@@ -117,6 +117,20 @@ namespace OP.Clients.WPFApp
             //var proxy = new POServiceClient("NetTcpBinding_IPOService");
             var proxy = new POProxy("NetTcpBinding_IPOService");
 
+            //proxy.ClientCredentials.Windows.ClientCredential.UserName = "grosvenor\\vpetrov";
+            //proxy.ClientCredentials.Windows.ClientCredential.Password = "********";
+
+            proxy.ClientCredentials.Windows.ClientCredential = new System.Net.NetworkCredential()
+            {
+                UserName = "grosvenor\\vpetrov",
+                //UserName = "grosvenor\\test",
+                Password = "Rvkd-4652"
+            };
+
+            //proxy.ClientCredentials.Windows.ClientCredential.Domain = "grosvenor";
+            
+            //proxy.ClientCredentials.Windows.ClientCredential = new System.Net.NetworkCredential()
+
             try
             {                
                 Products = await proxy.GetProductsAsync();
@@ -129,7 +143,7 @@ namespace OP.Clients.WPFApp
             }
             finally
             {
-                proxy.Close();
+                if(proxy.State == System.ServiceModel.CommunicationState.Opened) proxy.Close();
             }
             
             /*

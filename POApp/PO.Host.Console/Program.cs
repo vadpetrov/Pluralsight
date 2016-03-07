@@ -8,6 +8,7 @@ using System.Linq;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace PO.Host.ConsoleApp
@@ -18,6 +19,7 @@ namespace PO.Host.ConsoleApp
         {
             try
             {
+                var prinicipal = Thread.CurrentPrincipal;
                 //using (var host = new WebServiceHost(typeof(POService)))
                 using (var host = new ServiceHost(typeof(POService)))
                 //using (var tl = new TextWriterTraceListenerCustomOutput(Console.Out))

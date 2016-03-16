@@ -1,0 +1,331 @@
+﻿@model IEnumerable<TheWorld.Models.Trip>
+@{
+    ViewBag.Title = "Trips Page";
+}
+<link rel="stylesheet" href="~/lib/bootstrap-dialog/dist/css/bootstrap-dialog.min.css"/>
+<style type="text/css">
+/*.modal {
+  text-align: center;
+  padding: 0!important;
+}
+
+.modal:before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  margin-right: -4px; 
+ }
+
+.modal-dialog {
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle;
+}*/
+
+    /*.modal {
+        text-align: center;
+    }
+    .modal-dialog {
+        display: inline-block;
+        text-align: left;
+        vertical-align: middle;
+    }*/
+
+    @@media screen and (min-width: 768px) {
+
+        #myModal3 .modal-content {
+            box-shadow: -10px 10px 0 0 rgba(0,0,0,0.35);
+        }
+
+        /*#myModal3 .modal-dialog {
+            min-width: 120vh;
+            max-width: 120vh;
+            min-height: 80vh;
+            max-height: 80vh;
+        }*/
+
+        #myModal3 .modal-body {
+            width: 100%;
+            height: 20vh;
+            overflow: auto;
+        }
+    }
+</style>
+
+@section Scripts{
+<script type="text/javascript" src="~/lib/jquery-ui/jquery-ui.min.js"></script>
+<script type="text/javascript" src="~/lib/bootstrap-dialog/dist/js/bootstrap-dialog.min.js"></script>
+<script type="text/javascript">
+    (function () {
+
+        //BootstrapDialog.show(typeof (BootstrapDialog));
+
+        /* https://nakupanda.github.io/bootstrap3-dialog/
+        function jsonpCallback(data) {
+            console.log("CALLBACK")
+            console.log(data);
+        };
+
+        BootstrapDialog.show(
+            {
+                title: "Say-hello dialog",
+                //message: "Hello",
+                //message: $('<div></div>').load('remote.html'),
+
+                //message: function(dialog) {
+                //    var $message = $('<div></div>');
+                //    var pageToLoad = dialog.getData('pageToLoad');
+                //    $message.load(pageToLoad);        
+                //    return $message;
+                //},
+                message: function (dialog) {
+                    var $message = $('<div></div>');
+
+                    var url = "http://localhost:18279/api/products";
+                    var url1 = "http://localhost:18279/api/rc/restaurants/28";
+                    //var url3 = "http://pvm-web-dev/itl/FCReports/Default.aspx?RPT=CONTROLLER";
+
+                    //$.getJSON(url3, null, function (data) {
+                    //    $message.html(JSON.stringify(data));
+                    //    //$message.text(data);
+                    //});
+
+                    var xhr = new XMLHttpRequest();
+                    if ("withCredentials" in xhr)
+                    {
+
+                    }
+
+                    $.ajax({
+                        url: url1,
+                        //headers: { 'Access-Control-Allow-Origin': '*' },
+                        type: "GET",
+                        //async: false,
+                        cache: false,
+                        crossDomain: true,                        
+                        contentType: "application/json; charset=utf-8",
+                        //dataType: "jsonp",                        
+                        //success: jsonpCallback,
+                        statusCode: {
+                            200: function (data) {
+                                console.log(data);
+                                console.log("GOOOD");
+                            },                            
+                            404: function (data) { console.log(url + " ...not found."); },
+                            400: function (data) { console.log("BAD Request"); }
+                        }
+                    }).done(function (response) {
+                        console.log("DONE");
+                        //console.log(response);
+                        $message.html(JSON.stringify(response));                        
+                    }).fail(function (response) {
+                        console.log("FAIL");
+                        console.log(response);
+                    });                    
+                    return $message;
+                },
+                //data: {
+                //    //'pageToLoad': 'https://nakupanda.github.io/bootstrap3-dialog/remote.html'
+                //    //'pageToLoad': 'http://localhost:18279/api/rc/restaurants/28'
+                //    //"pageToLoad": "https://localhost:44300/Home/About"
+                //},
+
+
+                buttons: [{
+                    label: 'Set Title',
+                    action: function (dialog) {
+                        dialog.setTitle('Title Test');
+                    }
+                }, {
+                    label: "Set Message",
+                    action: function (dialog) {
+                        dialog.setMessage("Message Test");
+                    }
+                }]
+            });
+        */
+       
+       $("#myModal3").draggable({ handle: ".modal-header" });
+
+    }());
+</script>
+
+}
+
+
+<div class="modal fade" id="myModal1" role="dialog"  data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Modal Header</h4>
+            </div>
+            <div class="modal-body">
+                <p>This is a small modal 1.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="myModal2" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Modal Header 2</h4>
+            </div>
+            <div class="modal-body">
+                <p>This is a large(body) modal 2.</p>
+            </div>
+            <div class="modal-footer">
+                <a data-toggle="modal" href="#myModal1" class="btn btn-sm btn-danger" style="position:absolute;left:5px;">Modal In Front</a>       
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="myModal3" role="dialog"  data-backdrop="static" data-keyboard="false" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Modal Header 3</h4>
+            </div>
+            <div class="modal-body">
+                <p>This is a large modal 3.</p>
+                <p>This is a large modal 3.</p>
+                <p>This is a large modal 3.</p>
+                <p>This is a large modal 3.</p>
+                <p>This is a large modal 3.</p>
+                <p>This is a large modal 3.</p>
+                <p>This is a large modal 3.</p>
+                <p>This is a large modal 3.</p>
+                <p>This is a large modal 3.</p>
+                <p>This is a large modal 3.</p>
+                <p>This is a large modal 3.</p>
+                <p>This is a large modal 3.</p>
+                <p>This is a large modal 3.</p>
+                <p>This is a large modal 3.</p>
+                <p>This is a large modal 3.</p>
+                <p>This is a large modal 3.</p>
+            </div>
+            <div class="modal-footer">                                
+                <a data-toggle="modal" onclick="$('#myModal1').zIndex($('#myModal3').css('zIndex')+1);" href="#myModal1" class="btn btn-sm btn-danger" style="position:absolute;left:5px;">Modal In Front</a>
+                @*<a data-toggle="modal" data-target="#myModal1" class="btn btn-sm btn-danger" style="position:absolute;left:5px;">Modal In Front</a>*@  
+                
+                <button type="button" class="btn btn-sm btn-warning" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-sm btn-success">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <h1>The World</h1>
+        <p>This will be fun website soon !!! :)</p>
+        <form>
+            <div class="form-group">
+                <label>Date:</label>
+                <input class="form-control" />
+            </div>
+            <div class="form-group">
+                <label>Location:</label>
+                <input class="form-control" />
+            </div>
+            <div>
+                <input type="submit" value="Add" class="btn btn-success" />
+            </div>
+        </form>
+    </div>
+    <div class="container col-md-6">
+        <h2>Dynamic Tabs</h2>
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#home">The Map</a></li>
+            <li><a data-toggle="tab" href="#menu1">Menu 1</a></li>
+            @*<li><a data-toggle="tab" href="#menu2">Menu 2</a></li>*@
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Menu 2 <span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="#menu2_1" data-toggle="tab">Submenu 2-1</a></li>
+                    <li><a href="#menu2_2" data-toggle="tab">Submenu 2-2</a></li>
+                    <li><a href="#menu2_3" data-toggle="tab">Submenu 2-3</a></li>
+                </ul>
+            </li>
+            <li><a data-toggle="tab" href="#menu3">Menu 3</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div id="home" class="tab-pane fade in active">                
+                <div class="container-fluid" style="padding-top:25px;">
+                    <ul class="list-group">
+                        @foreach (var trip in Model)
+                        {
+                            <li class="list-group-item">@trip.Name (@trip.Created.ToShortDateString())</li>
+                        }
+                    </ul>
+                </div>             
+            </div>
+            <div id="menu1" class="tab-pane fade">
+                <h3>Menu 1</h3>
+                <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal1">Open Modal 1</button>
+                <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal2">Open Modal 2</button>
+                <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal3">Open Modal 3</button>  
+            </div>
+            @*<div id="menu2" class="tab-pane fade">
+            <h3>Menu 2</h3>
+            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+            </div>*@
+            <div id="menu3" class="tab-pane fade">
+                <h3>Menu 3</h3>
+            </div>
+            <div id="menu2_1" class="tab-pane fade">
+                <h3>Sub Menu 2-1</h3>
+                <p>Content 2-1</p>
+            </div>
+            <div id="menu2_2" class="tab-pane fade">
+                <h3>Sub Menu 2-2</h3>
+                <p>Content 2-2</p>
+            </div>
+            <div id="menu2_3" class="tab-pane fade">
+                <h3>Sub Menu 2-3</h3>
+                <p>Content 2-3</p>
+            </div>
+
+        </div>
+        <p />
+        <ul class="nav nav-pills">
+            <li class="active"><a data-toggle="pill" href="#home_p">Home</a></li>
+            <li><a data-toggle="pill" href="#menu_p1">Menu 1</a></li>
+            <li><a data-toggle="pill" href="#menu_p2">Menu 2</a></li>
+            <li><a data-toggle="pill" href="#menu_p3">Menu 3</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div id="home_p" class="tab-pane fade in active">
+                <h3>HOME</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            </div>
+            <div id="menu_p1" class="tab-pane fade">
+                <h3>Menu 1</h3>
+                <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            </div>
+            <div id="menu_p2" class="tab-pane fade">
+                <h3>Menu 2</h3>
+                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+            </div>
+            <div id="menu_p3" class="tab-pane fade">
+                <h3>Menu 3</h3>
+                <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+            </div>
+        </div>
+    </div>
+    @*<div class="col-md-6">
+    <h2>The Map</h2>
+    </div>*@
+</div>

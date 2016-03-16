@@ -31,3 +31,4 @@ D:\Projects\Pluralsight\RestaurantCentral\RestaurantCentral\bin\StructureMap.dll
 D:\Projects\Pluralsight\RestaurantCentral\RestaurantCentral\bin\WebActivator.dll
 D:\Projects\Pluralsight\RestaurantCentral\RestaurantCentral\bin\StructureMap.pdb
 D:\Projects\Pluralsight\RestaurantCentral\RestaurantCentral\bin\StructureMap.xml
+D:\Projects\Pluralsight\RestaurantCentral\RestaurantCentral\obj\Debug\RestaurantCentral.csprojResolveAssemblyReference.cache

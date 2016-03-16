@@ -38,14 +38,17 @@
     */
 
     var $sidebarAndWrapper = $("#sidebar, #wrapper");
+    var $icon = $("#sidebarToggle i.fa");
 
     $("#sidebarToggle").on("click", function ()
-    {
+    {        
         $sidebarAndWrapper.toggleClass("hide-sidebar");
         if ($sidebarAndWrapper.hasClass("hide-sidebar"))
-            $(this).text("Show Sidebar");
+            //$(this).text("Show Sidebar");
+            $icon.removeClass("fa-angle-double-left").addClass("fa-angle-double-right");
         else
-            $(this).text("Hide Sidebar");
+            $icon.removeClass("fa-angle-double-right").addClass("fa-angle-double-left");
+            //$(this).text("Hide Sidebar");
     });
 
 }());

@@ -1,0 +1,71 @@
+﻿<div>
+    <div>
+        <a href="#/" class="btn btn-sm btn-default">
+            <i class="fa fa-angle-left"></i> Back
+        </a>
+    </div>
+
+    <div class="col-md-3">
+        <h2>{{vm.tripName}}</h2>
+
+        <wait-cursor display-when="vm.isBusy"></wait-cursor>        
+        
+        <div class="alert alert-danger" ng-show="vm.errorMessage">{{vm.errorMessage}}</div>
+
+        <div>
+            <form name="newStopForm" ng-submit="vm.addStop()">
+                <div class="form-group has-feedback"  ng-class="{'has-error': newStopForm.arrival.$invalid, 'has-success': newStopForm.arrival.$valid}">
+                    <label>Date</label>
+                    <input class="form-control" id="arrival" name="arrival"
+                           ng-model="vm.newStop.arrival"
+                           required
+                           ng-pattern="/^(\d{2})\/(\d{2})\/(\d{4})$/" />
+
+                    <span class="text-warning" ng-show="newStopForm.arrival.$error.required">Required</span>
+                    <span class="text-warning" ng-show="newStopForm.arrival.$error.pattern">Must be in format of MM/DD/YYYY</span>
+
+                    <span class="glyphicon glyphicon-ok form-control-feedback" ng-show="newStopForm.arrival.$valid" ng-hide="newStopForm.arrival.$error"></span>
+                    <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="newStopForm.arrival.$error" ng-hide="newStopForm.arrival.$valid"></span>
+
+                </div>
+                <div class="form-group has-feedback" ng-class="{'has-error': newStopForm.name.$invalid, 'has-success': newStopForm.name.$valid}">
+                    <label>Location</label>
+                    <input class="form-control" id="name" name="name" ng-model="vm.newStop.name" required ng-minlength="5" />
+                    <span class="text-warning" ng-show="newStopForm.name.$error.required">Required</span>
+                    <span class="text-warning" ng-show="newStopForm.name.$error.minlength">Name must be at least five characters</span>
+
+                    <span class="glyphicon glyphicon-ok form-control-feedback" ng-show="newStopForm.name.$valid" ng-hide="newStopForm.name.$error"></span>
+                    <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="newStopForm.name.$error" ng-hide="newStopForm.name.$valid"></span>
+                </div>
+                <div><input type="submit" value="Add" class="btn btn-success" ng-disabled="newStopForm.$invalid"/></div>
+            </form>
+        </div>
+
+
+        <div style="height:50vh;overflow:auto;margin-top:10px;">
+            <!--fixed-header-->
+            <table class="table table-responsive table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th class="TABLE_HEADER_COLUMN_LOCKED" ng-repeat="header in vm.tableHeaders" ng-click="vm.sort.exec(header);">
+                            {{header.name}}
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="stop in vm.stops | orderBy: vm.sort.by">
+                        <td>{{ stop.name }}</td>
+                        <td>{{ stop.arrival | date: shortDate }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="col-md-9">
+        <h2>The Map</h2>
+        <div id="map">
+
+        </div>
+    </div>
+</div>

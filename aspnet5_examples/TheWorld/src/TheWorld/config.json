@@ -1,0 +1,14 @@
+﻿{
+  "AppSettings": {
+    "SiteEmailAddress": "test@mail.org",
+    "BingKey": "DONTHARDCODEKEYSINCONFIGURATION"
+  },
+
+  "Data": {    
+    "WorldContextConnection": {
+      "ConnectionString": "Server=(localdb)\\MSSQLLocalDB; Database=TheWorldDB;Trusted_Connection=true;MultipleActiveResultSets=true;",
+      //"ConnectionString": "Server=(localdb)\\ProjectsV12; Database=TheWorldDB;Trusted_Connection=true;MultipleActiveResultSets=true;"
+
+    }
+  }
+}

@@ -1,0 +1,9 @@
+﻿<div>
+    <table class="table table-responsive table-striped">
+        <tr ng-repeat="trip in vm.trips | orderBy: vm.sortOrder">
+            <td>{{trip.name}}</td>
+            <td>{{trip.created | date:"longDate"}}</td>
+            <td><a ng-href="#/editor/{{trip.name}}" class="btn btn-sm btn-primary">Manage</a></td>
+        </tr>
+    </table>
+</div>

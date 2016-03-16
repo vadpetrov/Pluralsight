@@ -1,4 +1,4 @@
-{ 
+{
   "version": "1.0.0-*",
   "compilationOptions": {
     "emitEntryPoint": true
@@ -19,14 +19,13 @@
     "AutoMapper": "4.2.1",
     "Microsoft.AspNet.Identity.EntityFramework": "3.0.0-rc1-final"
   },
-
   "commands": {
-    "web": "Microsoft.AspNet.Server.Kestrel",
+    "web": "Microsoft.AspNet.Server.Kestrel --server.urls=http://*:5050",
+    "kestrel": "Microsoft.AspNet.Server.Kestrel --server.urls=http://*:5010",
     "ef": "EntityFramework.Commands"
   },
 
-  "frameworks": 
-  {
+  "frameworks": {
     "dnx451": {
       "dependencies": { "System.Net.Http": "4.0.1-beta-23516" }
     },
@@ -34,7 +33,7 @@
       "dependencies": { "System.Net.Http": "4.0.1-beta-23516" }
     }
   },
- 
+
   "exclude": [
     "wwwroot",
     "node_modules"
@@ -45,13 +44,7 @@
     "**.vspscc"
   ],
   "scripts": {
-    "prepare": "echo prepare",
-    "prebuild": "echo before building",
-    "postbuild": "echo after building",
-    "prepack": "echo before packing",
-    "postpack": "echo after packing",
-    "prerestore": "echo before restoring packages",
-    "postrestore": "echo after restoring packages",
-    "__prebuild": [ "npm install", "bower install", "gulp clean", "gulp min" ]
+    "prepublish": [ "npm install", "bower install" ],
+    "prepare": "gulp minify"
   }
 }

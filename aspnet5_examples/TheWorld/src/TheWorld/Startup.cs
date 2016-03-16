@@ -44,9 +44,9 @@ namespace TheWorld
         {
             services.AddMvc(config =>
             {
-#if !DEBUG
-              config.Filters.Add(new RequireHttpsAttribute());
-#endif
+//#if !DEBUG
+//              config.Filters.Add(new RequireHttpsAttribute());
+//#endif
             })
             .AddJsonOptions(opt =>
             {
@@ -109,13 +109,20 @@ namespace TheWorld
             services.AddScoped<IModelFactory, WorldModelFactory>();
 
 #if DEBUG
-            services.AddScoped<IMailService, DebugMailService>();            
+            services.AddScoped<IMailService, DebugMailService>();
 #else
-            services.AddScoped<IMailService, MailService>();
+            //just for test
+            services.AddScoped<IMailService, DebugMailService>();
+            //services.AddScoped<IMailService, MailService>();
 #endif
         }
 
 
+        //Publish using DNU commands - without RUNTIMES
+        //TheWorld\src\TheWorld>dnu publish -o D:\Test\TheWorldDnu
+
+        //Publish using DNU commands - with specific RUNTIMES
+        //TheWorld\src\TheWorld>dnu publish -o D:\Test\TheWorldDnu --runtime dnx-clr-win-x64.1.0.0-rc1-update1
 
         //use Postman app for webapi testing getpostman.com
         //http://www.johnpapa.net/get-up-and-running-with-node-and-visual-studio/
@@ -129,8 +136,20 @@ namespace TheWorld
         //public void Configure(IApplicationBuilder app, WorldContextSeedData seeder, ILoggerFactory loggerFactory, IHostingEnvironment env)
         public async void Configure(IApplicationBuilder app, WorldContextSeedData seeder, ILoggerFactory loggerFactory, IHostingEnvironment env)
         {
-            //loggerFactory.AddProvider(new CustomLogger());
-            loggerFactory.AddDebug(LogLevel.Warning);
+
+            if (env.IsDevelopment())
+            {
+                //loggerFactory.AddProvider(new CustomLogger());
+                loggerFactory.AddDebug(LogLevel.Information);
+                app.UseDeveloperExceptionPage();
+                app.UseRuntimeInfoPage();
+            }
+            else
+            {                
+                loggerFactory.AddDebug(LogLevel.Error);
+                //app.UseExceptionHandler("App/Error");
+                app.UseDeveloperExceptionPage();
+            }            
 
             //app.UseDefaultFiles();
             app.UseStaticFiles();
@@ -143,7 +162,7 @@ namespace TheWorld
                 config.CreateMap<Stop, StopViewModel>().ReverseMap();
             });
 
-
+            /*
 #if DEBUG
             if (env.IsDevelopment())
             {
@@ -158,6 +177,7 @@ namespace TheWorld
 #else
          
 #endif
+            */
 
             app.UseMvc(config =>
             {

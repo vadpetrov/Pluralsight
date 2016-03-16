@@ -12,20 +12,23 @@
       "commandName": "IISExpress",
       "launchBrowser": true,
       "environmentVariables": {
-        "Hosting:Environment": "Development"
+        "Hosting:Environment": "Production"
       },
       "sdkVersion": "dnx-clr-win-x64.1.0.0-rc1-update1"
     },
     "web": {
       "commandName": "web",
+      "launchBrowser": true,
+      "launchUrl": "http://localhost:5050/",
       "environmentVariables": {
         "Hosting:Environment": "Development"
       },
       "sdkVersion": "dnx-clr-win-x64.1.0.0-rc1-update1"
     },
     "kestrel": {
-      "commandName": "IISExpress",
+      "commandName": "kestrel",
       "launchBrowser": true,
+      "launchUrl": "http://localhost:5010/",
       "environmentVariables": {
         "Hosting:Environment": "Development"
       },

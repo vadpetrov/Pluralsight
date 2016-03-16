@@ -48,11 +48,18 @@ namespace TheWorld.Controllers.Api
                     //var newTrip = _modelFactory.Create(model);
                     var newTrip = Mapper.Map<Trip>(model);
 
+                    if(Repository.GetAllTrips().Where(t => t.Name == newTrip.Name).Any())
+                    {
+                        Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                        return Json(new { Message = "Trip already exists" });
+                    }
+
+
                     newTrip.UserName = User.Identity.Name;
                     
                     //Save to Database                    
-                    Logger.LogInformation("Attempting to save new trip");
-                    
+                    Logger.LogInformation("Attempting to save new trip");                   
+
                     Repository.AddTrip(newTrip);
 
                     if (Repository.SaveAll())

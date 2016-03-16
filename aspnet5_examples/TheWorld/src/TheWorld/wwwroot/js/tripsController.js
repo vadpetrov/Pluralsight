@@ -36,8 +36,8 @@
                 .then(function (data) {
                     vm.trips.push(data);
                     vm.newTrip = {};
-                }, function (error) {
-                    vm.errorMessage = "Failed to save new trip.";
+                }, function (err) {
+                    vm.errorMessage = "Failed to save new trip. - " + err.data.message;
                 })
                 .finally(function () {
                     vm.isBusy = false;

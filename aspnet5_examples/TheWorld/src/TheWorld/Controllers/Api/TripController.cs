@@ -11,10 +11,15 @@ using TheWorld.ViewModels;
 using TheWorld.Factories;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNet.Authorization;
+using System.Net.Http;
+using System.IO;
+using System.Xml.Xsl;
+using System.Text;
+using System.Xml;
 
 namespace TheWorld.Controllers.Api
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/trips")]
     public class TripController : BaseController //Controller
     {   
@@ -25,7 +30,7 @@ namespace TheWorld.Controllers.Api
         }
 
         //[HttpGet("api/trips")]
-        [HttpGet("")]
+        [HttpGet]        
         public JsonResult Get()
         {
             var trips = Repository.GetUserTripsWithStops(User.Identity.Name);
@@ -35,6 +40,42 @@ namespace TheWorld.Controllers.Api
             //    .Select(t => _modelFactory.Create(t));
 
             return Json(results);
+        }
+
+        [HttpGet]
+        [Route("~/api/trip/{tripname:alpha}/toexcel")]
+        public IActionResult ToExcel(string tripName)
+        {
+            var trip = Repository.GetTripByName(tripName, User.Identity.Name);
+            trip.Stops = trip.Stops.OrderBy(s => s.Order)
+            .ThenBy(s => s.Name)
+            .ToList();
+
+            var tripVM = Mapper.Map<TripViewModel>(trip);
+            var modelFactory = new WorldModelFactory();
+            var xDoc = modelFactory.ToXml(tripVM);
+
+            byte[] buffer;
+
+            using (var ms = new MemoryStream())
+            using (var sw = new StreamWriter(ms, Encoding.UTF8))
+            {
+                var settings = new XsltSettings(true, true);
+
+                var resolver = new XmlUrlResolver();
+                resolver.Credentials = CredentialCache.DefaultCredentials;
+
+                var xslct = new XslCompiledTransform();
+                xslct.Load(@"..\Views\App\test.xslt", settings, resolver);
+
+                xslct.Transform(xDoc.CreateReader(), null, sw);
+
+                ms.Seek(0, SeekOrigin.Begin);
+                sw.Flush();
+                buffer = ms.ToArray();
+            }
+
+            return File(buffer, "application/vnd.ms-excel", "ExcelReport.xls");
         }
 
         //[HttpPost("api/trips")]

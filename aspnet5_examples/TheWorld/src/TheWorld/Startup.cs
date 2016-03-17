@@ -186,6 +186,13 @@ namespace TheWorld
                   template: "{controller}/{action}/{id?}",
                   defaults: new { controller = "App", action = "Index" }
                   );
+
+                //config.MapRoute(
+                //  name: "App",
+                //  template: "App/{action}/{id?}",
+                //  defaults: new {controller="app", action = "Index" }
+                //  );
+
             });
 
             /*

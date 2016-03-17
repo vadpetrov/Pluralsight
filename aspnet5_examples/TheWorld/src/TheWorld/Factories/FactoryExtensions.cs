@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using TheWorld.Models;
 using TheWorld.ViewModels;
 
@@ -55,6 +56,35 @@ namespace TheWorld.Factories
                 Latitude = model.Latitude                
             };
             return stop;
+        }
+
+        public static XDocument ToXml(this IModelFactory factory, TripViewModel trip)
+        {
+            var oDoc = new XDocument();
+            var oRoot = new XElement("root");
+            oRoot.SetAttributeValue("id", trip.Id);
+            oRoot.SetAttributeValue("name", trip.Name);
+
+            var tableStops = new XElement("table", new XAttribute("id", "stops"));
+
+            foreach (var stop in trip.Stops)
+            {
+                var oRow = new XElement("row");
+
+                oRow.Add(new XElement("item", new XAttribute("id", "id"), new XAttribute("value", stop.Id)),
+                    new XElement("item", new XAttribute("id", "name"), new XAttribute("value", stop.Name)),
+                    new XElement("item", new XAttribute("id", "arrival"), new XAttribute("value", stop.Arrival.ToString("MM/dd/yyyy"))));
+                    
+                tableStops.Add(oRow);
+            }
+
+            oRoot.Add(tableStops);
+            oDoc.Add(oRoot);
+            return oDoc;
+        }
+        private static XElement CreateXElement(string id, string value)
+        {
+            return new XElement(id, value);
         }
     }
 }

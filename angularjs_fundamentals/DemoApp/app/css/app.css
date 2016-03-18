@@ -1,0 +1,29 @@
+﻿.well-title {
+  margin-top: 0;
+}
+.session {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;    
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.badge-inverse{
+    background-color:#3a3f44;
+    text-align:center;
+}
+
+.votingWidget {
+  height: 64px;
+  padding: 7px;
+}
+
+.votingButton {  
+  text-align:center;
+  cursor:pointer;
+}
+
+.white {
+    color:white;
+}

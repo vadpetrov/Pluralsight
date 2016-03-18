@@ -1,0 +1,10 @@
+{
+  "version": "1.0.0",
+  "name": "DemoApp",
+  "private": true,
+  "description": "This project is a sample application demonstrating a more fully developed realistic single page angular application.",
+  "devDependencies": {
+    "express": "~4.13.4",
+    "body-parser": "~1.15.0"
+  }
+}

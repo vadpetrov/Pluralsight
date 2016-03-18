@@ -1,0 +1,121 @@
+﻿<!DOCTYPE html>
+<html ng-app="eventsApp">
+<head>
+    <title>Event Registration</title>
+	<meta charset="utf-8" />
+    <!--<link rel="stylesheet" href="../lib/bootstrap/dist/css/bootstrap.min.css"/>-->
+    <!--<link rel="stylesheet" href="../lib/bootswatch/cyborg/bootstrap.min.css"/>-->
+    <link rel="stylesheet" href="../lib/bootswatch/slate/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../lib/fontawesome/css/font-awesome.min.css" />
+    <!--<link rel="stylesheet" href="../css/bootstrap.min.css"/>-->
+    <link rel="stylesheet" href="../css/app.css"/>    
+</head>
+<body>
+    <div class="container">
+        <!--<div class="nav navbar">
+            <div class="nav navbar-inverse">
+                <ul class="nav">
+
+                </ul>
+            </div>
+        </div>-->
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <ul class="nav navbar-nav navbar-left"></ul>
+            </div>
+        </nav>
+
+        <!--<div ng-controller="EventController as vm" style="padding-left:20px;padding-right:20px;">-->
+        <div class="row" ng-controller="EventController as vm">
+            <div class="col-md-10 col-md-offset-1" style="{{vm.event.divShowBorder ? vm.event.divBorder : ''}}">
+
+                <img ng-src="{{vm.event.imageUrl}}" alt="{{vm.event.name}}">
+                <div class="row">
+                    <div class="col-md-12" style="{{vm.event.divShowBorder ? vm.event.divBorder : ''}}">
+                        <h2>{{vm.event.name}}</h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3" style="{{vm.event.divShowBorder ? vm.event.divBorder : ''}}">
+                        <!--<div><strong>Date:</strong> {{vm.event.date}}</div>-->
+                        <!--<div><strong>Time:</strong> {{vm.event.time}}</div>-->
+                        <div>
+                            <label class="label label-default">Date:</label>
+                            <span class="text-left small">{{vm.event.date}}</span>
+                        </div>
+                        <div>
+                            <label class="label label-default">Time:</label>
+                            <span class="text-left small">{{vm.event.time}}</span>
+                        </div>
+                    </div>
+                    <div class="col-md-4" style="{{vm.event.divShowBorder ? vm.event.divBorder : ''}}">
+                        <address>
+                            <label class="label label-warning">Address:</label>
+                            <div>
+                                <span class="text-left small">{{vm.event.location.address}}</span>
+                            </div>
+                            <div>
+                                <span class="text-left small">{{vm.event.location.city}}, {{vm.event.location.province}}</span>
+                            </div>
+                            <!--<strong>Address:</strong><br />
+                                {{vm.event.location.address}}<br />
+                                {{vm.event.location.city}}, {{vm.event.location.province}}
+                            -->
+                        </address>
+                    </div>
+                </div>
+
+                <hr />
+                <h3>Sessions</h3>
+                <ul class="thumbnails list-unstyled" style="{{vm.event.divShowBorder ? vm.event.divBorder : ''}}">
+                    <li ng-repeat="session in vm.event.sessions">
+                        <div class="row session">
+                            <div class="col-xs-1 well votingWidget" style="width:40px;padding-top:0;padding-bottom:0;padding-left:10px;">
+                                <div class="votingButton" ng-click="vm.upVoteSession(session)" style="padding-top:0;">
+                                    <!--<i class="glyphicon glyphicon-chevron-up white"></i>-->
+                                    <i class="fa fa-chevron-up white"></i>
+                                </div>
+                                <div class="badge badge-inverse">
+                                    <div>{{session.upVoteCount}}</div>
+                                </div>
+                                <div class="votingButton" ng-click="vm.downVoteSession(session)" style="padding-top:0;">
+                                    <!--<i class="glyphicon glyphicon-chevron-down"></i>-->
+                                    <i class="fa fa-chevron-down"></i>
+                                </div>
+                            </div>
+                            <div class="col-md-9 well">
+                                <h4 class="well-title">{{session.name}}</h4>
+                                <h6 style="margin-top:-10px;">{{session.creatorName}}</h6>
+                                <span>Duration: {{session.duration}}</span><br />
+                                <span>Level: {{session.level}}</span>
+                                <p>{{session.abstract}}</p>                                
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <!--
+                <div class="row">
+                    <div class="col-md-9" style="{{vm.event.divShowBorder ? vm.event.divBorder : ''}}">
+                        <label class="label label-default text-center">Sessions</label>
+
+                        <ul class="list-group thumbnail">
+                            <li class="list-group-item" ng-repeat="session in vm.event.sessions">
+                                {{session.name}}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                -->
+            </div>
+        </div>
+    </div>
+
+    <script src="../lib/jquery/dist/jquery.min.js"></script>
+    <script src="../lib/underscore/underscore-min.js"></script>
+    <script src="../lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../lib/angular/angular.js"></script>
+    <script src="../js/app.js"></script>
+    <script src="../js/controllers/EventController.js"></script>
+</body>
+</html>
+

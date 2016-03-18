@@ -3,7 +3,7 @@
     
     "use strict";
 
-    var app = angular.module("app-trips", ["simpleControls", "ngRoute"]);
+    var app = angular.module("app-trips", ["simpleControls", "datePickerControl", "ngRoute"]);
 
     app.config(function($routeProvider){
 

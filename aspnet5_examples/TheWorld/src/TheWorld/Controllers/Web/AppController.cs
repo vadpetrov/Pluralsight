@@ -58,7 +58,7 @@ namespace TheWorld.Controllers.Web
             return View();
         }
 
-        [Route("app/toexcel/{tripname}")]
+        [Route("app/{tripname}/toexcel")]
         public IActionResult ToExcel(string tripName)
         {
             var trip = Repository.GetTripByName(tripName, User.Identity.Name);

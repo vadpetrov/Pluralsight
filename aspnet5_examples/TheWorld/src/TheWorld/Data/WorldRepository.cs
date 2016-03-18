@@ -90,6 +90,14 @@ namespace TheWorld.Data
                 .Where(t => t.Name == tripName && t.UserName == userName)
                 .FirstOrDefault();
         }
+        public Trip GetTripById(int tripId, string userName)
+        {
+            return _context.Trips
+                .Include(t => t.Stops)
+                .Where(t => t.Id == tripId && t.UserName == userName)
+                .FirstOrDefault();
+        }
+
 
         public void AddStop(string tripName, string userName, Stop newStop)
         {

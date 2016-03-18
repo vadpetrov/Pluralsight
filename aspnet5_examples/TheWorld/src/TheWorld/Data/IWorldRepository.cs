@@ -11,6 +11,8 @@ namespace TheWorld.Data
         IEnumerable<Trip> GetAllTripsWithStops();
         //Trip GetTripByName(string tripName);
         Trip GetTripByName(string tripName, string userName);
+        Trip GetTripById(int tripId, string userName);
+
         IEnumerable<Trip> GetUserTripsWithStops(string name);
 
 

@@ -43,10 +43,13 @@ namespace TheWorld.Controllers.Api
         }
 
         [HttpGet]
-        [Route("~/api/trip/{tripname:alpha}/toexcel")]
+        [Route("~/api/trip/{tripname}/toexcel")]
         public IActionResult ToExcel(string tripName)
+        //[Route("~/api/trip/{tripid:int}/toexcel")]
+        //public IActionResult ToExcel(int tripId)
         {
             var trip = Repository.GetTripByName(tripName, User.Identity.Name);
+            //var trip = Repository.GetTripById(tripId, User.Identity.Name);
             trip.Stops = trip.Stops.OrderBy(s => s.Order)
             .ThenBy(s => s.Name)
             .ToList();

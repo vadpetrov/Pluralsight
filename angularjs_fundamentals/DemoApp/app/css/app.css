@@ -1,4 +1,6 @@
-﻿.well-title {
+﻿body { padding-top: 70px; }
+
+.well-title {
   margin-top: 0;
 }
 .session {
@@ -26,4 +28,16 @@
 
 .white {
     color:white;
+}
+
+.blue {
+    color:blue;
+}
+
+
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+
+    display:none;
+
 }

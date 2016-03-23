@@ -6,10 +6,93 @@
     module.controller("EventController", EventController);   
     
 
-    function EventController($scope) {
+    function EventController($scope, $sce, eventData, $log) {
 
         var vm = this;
-        vm.event = eventData();
+
+        vm.trips = [{}];
+        //vm.event = null;
+
+
+        //vm.event = eventData.event;
+
+        //using $resource ngResource
+        //vm.event = eventData.getEvent3();
+
+        //eventData.getEvent3()
+        //.$promise.then(
+        //function (event) {
+        //    vm.event = event;
+        //    console.log(event);
+        //},
+        //function (error) {
+        //    console.log("Failed to load data.");
+        //    console.log(error);
+        //});
+
+        eventData.getEvent3()
+        .$promise.then(function (event) {
+                vm.event = event;
+                console.log(event);
+        })
+        .catch(function (error) {
+            console.log("Failed to load data.");
+            console.log(error);
+        })
+        .finally(function () {
+           console.log("Get events call: END");
+        });
+
+
+
+
+        
+
+
+        //eventData.getEvent2()
+        //.success(function (event) {
+        //    vm.event = event;
+        //})
+        //.error(function (data, status, headers, config) {
+        //    $log.warn("get event error");
+        //    $log.warn(data, status, headers(), config);
+        //});
+
+
+
+        //eventData.getEvent(function (event) {
+        //    vm.event = event;
+        //});
+
+        //eventData.getEvent1()
+        //.then(
+        //    function (data) {
+        //        vm.event = data;
+        //    },
+        //    function (error) {
+        //        console.log("Failed to load data.");
+        //        console.log(error);
+        //    })
+        //.finally(function () {
+        //   console.log("Get events call: END");
+        //});
+
+
+
+        vm.snippet = "<span style='color:red'>hi there</span>";
+        vm.snippetSafe = $sce.trustAsHtml("<span style='color:red'>hi there</span>");
+
+        vm.boolValue = true;
+        vm.mystyle = { color: "green" };
+        vm.myclass = "blue";
+        vm.buttonDisabled = true;
+        vm.sortorder = "name";
+        //vm.sortorder = "[-upVoteCount,name]";
+
+        vm.toJsDate = function (str) {
+            if (!str) return null;
+            return new Date(str);
+        };
 
         vm.upVoteSession = function (session) {
             session.upVoteCount++;
@@ -17,53 +100,6 @@
 
         vm.downVoteSession = function (session) {
             session.upVoteCount--;
-        }
-
-
-        $scope.event = eventData();       
-
-
-        function eventData()
-        {
-            return {
-                divShowBorder: false,
-                divBorder:"border:1px solid white;",
-                name: "Angular Boot Camp",
-                date: "1/1/2013",
-                time: "10:30 am",
-                location: {
-                    address: 'Google Headquarters',
-                    city: 'Mountain View',
-                    province: 'CA'
-                },
-                imageUrl: '/img/angularjs-logo.png',
-                sessions: [
-                      {
-                          name: 'Directives Masterclass',
-                          creatorName: 'Bob Smith',
-                          duration: "1 hr",
-                          level: 'Advanced',
-                          abstract: 'In this session you will learn the ins and outs of directives!',
-                          upVoteCount: 0
-                      },
-                      {
-                          name: 'Scopes for fun and profit',
-                          creatorName: 'John Doe',
-                          duration: "30 mins",
-                          level: 'Introductory',
-                          abstract: 'This session will take a closer look at scopes. Learn what they do, how they do it, and how to get them to do it for you.',
-                          upVoteCount: 0
-                      },
-                      {
-                          name: 'Well Behaved Controllers',
-                          creatorName: 'Jane Doe',
-                          duration: "2 hours",
-                          level: 'Intermediate',
-                          abstract: 'Controllers are the beginning of everything Angular does. Learn how to craft controllers that will win the respect of your friends and neighbors',
-                          upVoteCount: 0
-                      }
-                ]
-            };
         }
     };
 

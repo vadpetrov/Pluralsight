@@ -16,11 +16,13 @@ using System.IO;
 using System.Xml.Xsl;
 using System.Text;
 using System.Xml;
+using Microsoft.AspNet.Cors;
 
 namespace TheWorld.Controllers.Api
 {
     //[Authorize]
     [Route("api/trips")]
+    //[EnableCors("AllowAll")]
     public class TripController : BaseController //Controller
     {   
         public TripController(IWorldRepository repository, ILogger<TripController> logger, IModelFactory modelFactory):
@@ -30,7 +32,10 @@ namespace TheWorld.Controllers.Api
         }
 
         //[HttpGet("api/trips")]
-        [HttpGet]        
+        [HttpGet]
+        [Authorize("Bearer")]
+        //[EnableCors()]
+        [EnableCors("AllowAll")]
         public JsonResult Get()
         {
             var trips = Repository.GetUserTripsWithStops(User.Identity.Name);
@@ -83,6 +88,7 @@ namespace TheWorld.Controllers.Api
 
         //[HttpPost("api/trips")]
         [HttpPost("")]
+        [EnableCors("AllowAll")]
         public JsonResult Post([FromBody]TripViewModel model)
         {
             try

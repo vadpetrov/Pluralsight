@@ -3,3 +3,4 @@
 /// <reference path="../lib/angular/angular.js" />
 /// <reference path="../lib/underscore/underscore.js" />
 /// <reference path="app.js" />
+/// <reference path="services/EventData.js" />

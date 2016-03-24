@@ -6,7 +6,7 @@
     module.controller("EventController", EventController);   
     
 
-    function EventController($scope, $sce, eventData, $log) {
+    function EventController($scope, $sce, eventData, $log, $anchorScroll) {
 
         var vm = this;
 
@@ -34,6 +34,7 @@
         .$promise.then(function (event) {
                 vm.event = event;
                 console.log(event);
+                console.log("Success");
         })
         .catch(function (error) {
             console.log("Failed to load data.");
@@ -100,7 +101,12 @@
 
         vm.downVoteSession = function (session) {
             session.upVoteCount--;
-        }
+        };
+
+        vm.scrollToSession = function () {
+            console.log("scroll");
+            $anchorScroll();
+        };
     };
 
 }());

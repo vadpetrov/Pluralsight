@@ -3,16 +3,14 @@
     "use strict";
 
     var module = angular.module("eventsApp");
-    module.factory("eventData", repo);
-
-    
-    ////////////////////////////////////////////////////////////////////////////
-    
+    module.factory("eventData", repo);    
+    ////////////////////////////////////////////////////////////////////////////   
 
     function repo($http, $log, $resource) {
 
         var resource = $resource("/data/event/:id", { id: "@id" });
-
+        //var resource = $resource("/data/event/:id", { id: "@id" }, { "getAll": { method: "GET", isArray: true, params: { something: "foo" } } });
+        
         return {
             event: getData(),            
             getEvent: getEvent,

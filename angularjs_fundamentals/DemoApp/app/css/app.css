@@ -34,7 +34,31 @@
     color:blue;
 }
 
+/*.text-left {
+    text-align:left;
+}*/
+.label.label-block {
+    display:block;
+}
 
+.label.label-left {
+  text-align:left;
+}
+.label.label-right {
+  text-align:right;
+}
+.label.label-center {
+  text-align:center;
+}
+.top-margin {
+    margin-top:10px;
+}
+.left-margin-sm {
+    margin-left:5px;
+}
+.left-margin-md {
+    margin-left:10px;
+}
 
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
 

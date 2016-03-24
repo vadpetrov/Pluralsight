@@ -41,9 +41,10 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Reports <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">Action</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something else here</a></li>
+                                <li><a href="../views/CacheSample.html">Cash Sample</a></li>
+                                <li><a href="../views/CompileSample.html">Compile & Parse Sample</a></li>
+                                <li><a href="../views/LocaleSample.html">Locale Sample</a></li>
+                                <li><a href="../views/TimeoutSample.html" >Timeout Sample</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li><a href="#">Separated link</a></li>
                                 <li role="separator" class="divider"></li>
@@ -84,6 +85,8 @@
             <div class="col-md-10 col-md-offset-1" style="{{vm.event.divShowBorder ? vm.event.divBorder : ''}}">
 
                 <img ng-src="{{vm.event.imageUrl}}" alt="{{vm.event.name}}">
+
+                <button type="button" class="btn btn-primary" ng-click="vm.scrollToSession()">Scroll</button>
 
                 <div class="row">
                     <div class="col-md-12" style="{{vm.event.divShowBorder ? vm.event.divBorder : ''}}">
@@ -214,7 +217,7 @@
                 <ul class="thumbnails list-unstyled" style="{{vm.event.divShowBorder ? vm.event.divBorder : ''}}">
 
                     <!--<li ng-repeat="session in vm.event.sessions | orderBy: vm.sortorder | limitTo:2">-->
-                    <li ng-repeat="session in vm.event.sessions | orderBy: vm.sortorder | filter: vm.query">
+                    <li ng-repeat="session in vm.event.sessions | orderBy: vm.sortorder | filter: vm.query" id="session{{session.id}}" name="session{{session.id}}">
                         <!--<div class="row session" ng-class-odd="'white'" ng-class-even="'blue'">-->
                         <div class="row session">
                             <div class="col-xs-1 well votingWidget" style="width:40px;padding-top:0;padding-bottom:0;padding-left:10px;">
@@ -266,6 +269,7 @@
     <script src="../lib/underscore/underscore-min.js"></script>
     <script src="../lib/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="../lib/angular/angular.js"></script>
+    <script src="../lib/angular-dynamic-locale/dist/tmhDynamicLocale.min.js"></script>
     <script src="../lib/angular-sanitize/angular-sanitize.min.js"></script>
     <script src="../lib/angular-resource/angular-resource.min.js"></script>
 

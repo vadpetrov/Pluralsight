@@ -6,8 +6,10 @@
     "bootstrap": "~3.3.6",
     "angular": "~1.5.1",
     "angular-resource": "~1.5.2",
-    "angular-sanitize": "~1.5.2",    
+    "angular-sanitize": "~1.5.2",
     "angular-material": "~1.0.6",
+    "angular-dynamic-locale": "~0.1.30",
+    "angular-i18n": "*",
     "underscore": "~1.8.3",
     "bootswatch": "~3.3.6",
     "fontawesome": "~4.5.0"

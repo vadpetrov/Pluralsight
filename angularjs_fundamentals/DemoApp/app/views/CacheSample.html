@@ -1,0 +1,183 @@
+﻿<!doctype html>
+<html lang="en" ng-app="eventsApp">
+<head>
+    <meta charset="utf-8">
+    <title>Cache Sample</title>
+    <link rel="stylesheet" href="../lib/bootswatch/slate/bootstrap.min.css" />
+    <link rel="stylesheet" href="../lib/fontawesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="../css/app.css" />
+</head>
+<body>
+    <div class="container">
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="../views/EventDetails.html">Brand</a>
+                </div>
+
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li><a href="../views/NewEvent.html">Create Event</a></li>
+                        <li><a href="#">Administration</a></li>
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Reports <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li class="active"><a href="../views/CacheSample.html">Cash Sample</a></li>
+                                <li><a href="#">Another action</a></li>
+                                <li><a href="#">Something else here</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#">Separated link</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#">One more separated link</a></li>
+                            </ul>
+                        </li>
+
+                    </ul>
+
+                    <form class="navbar-form navbar-left" role="search">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Search">
+                        </div>
+                        <button type="submit" class="btn btn-default">Submit</button>
+                    </form>
+
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="../views/EditProfile.html">Profile</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Action</a></li>
+                                <li><a href="#">Another action</a></li>
+                                <li><a href="#">Something else here</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#">Separated link</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </nav>
+
+
+        <div ng-controller="CacheSampleController">
+
+
+            <div class="row" style="border:0.5pt solid white">
+                <div class="col-md-6" style="border:0.5pt solid red">
+                    <div class="form-group col-md-12" style="border:0.5pt solid orange;">
+                        <label class="col-md-3 label" for="key" style="border:0.5pt solid blue;">Key:</label>
+                        <div class="col-md-9" style="border:0.5pt solid blue;">
+                            <input class="form-control input-sm" type="text" id="key" name="key" ng-model="key" />
+                        </div>
+                    </div>
+                    <div class="form-group col-md-12" style="border:0.5pt solid orange;">
+                        <label class="col-md-3 label" for="value" style="border:0.5pt solid blue;">Value:</label>
+                        <div class="col-md-9" style="border:0.5pt solid blue;">
+                            <input class="form-control input-sm" type="text" id="value" name="value" ng-model="value" />
+                        </div>
+                    </div>
+                    <div class="form-group col-md-12" style="border:0.5pt solid orange;">
+                        <div class="col-md-1 col-md-push-3" style="border:0.5pt solid blue;">
+                            <button type="button" class="btn btn-sm" ng-click="addToCache(key, value)">Add To Cache</button>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-12" style="border:0.5pt solid orange;">
+                        <div class="col-md-9 col-md-push-3" style="border:0.5pt solid blue;">
+                            <input type="text" class="form-control input-sm"
+                                   id="keytoread" name="key"
+                                   ng-model="keyToRead" />
+                            </div>
+                        </div>
+                    <div class="form-group col-md-12" style="border:0.5pt solid orange;">
+                        <label class="label label-block label-left">Value from cache: {{readFromCache(keyToRead)}}</label>
+                        <label class="label label-block label-left">Cache Stats: {{getCacheStats()}}</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div ng-controller="CacheSampleController">
+
+        <div class="row top-margin">
+            <div class="form-inline col-md-5">
+                <label class="col-md-1 label label-right" for="key">Key:</label>
+                <input type="text" class="input-sm form-control left-margin-sm" id="key" name="key" size="30" ng-model="key" />
+            </div>
+        </div>
+
+        <div class="row top-margin">
+            <div class="form-inline col-md-5">
+                <label class="col-md-1 label label-right" for="value">Value:</label>
+                <input type="text" class="input-sm form-control left-margin-sm" id="value" name="value" size="30" ng-model="value" />
+            </div>
+
+        </div>
+
+        <div class="row top-margin">
+            <div class="col-md-5">
+                <button type="button" class="btn btn-sm col-md-4 col-md-push-1 left-margin-sm" ng-click="addToCache(key, value)">Add To Cache</button>
+            </div>
+        </div>
+
+        <div class="row top-margin">
+            <div class="form-inline col-md-5">
+                <input type="text" class="col-md-4 col-md-push-1 input-sm form-control left-margin-sm"
+                       id="keytoread" name="key" size="30"
+                       ng-model="keyToRead" />
+            </div>
+        </div>
+        <div class="row top-margin">
+            <div class="form-group col-md-5">
+                <label class="label label-block label-left">Value from cache: {{readFromCache(keyToRead)}}</label>
+                <label class="label label-block label-left">Cache Stats: {{getCacheStats()}}</label>
+            </div>
+        </div>
+    </div>
+    <!--
+    <div class="row">
+        <div class="form-group col-md-4">
+            <label class="col-md-2 label label-right" for="key">Key:</label>
+            <input type="text" class="col-md-4 input-sm form-control" id="key" name="key" />
+        </div>
+        <div class="form-group col-md-4">
+            <label class="col-md-2 label label-right" for="value">Value:</label>
+            <input type="text" class="col-md-4 input-sm form-control" id="value" name="value" />
+        </div>
+    </div>
+    -->
+    <!--<div class="row" style="border:white 1px solid">
+        <label class="col-md-1 col-md-offset-2" for="key">Key1:</label>
+        <input class="col-md-4" />
+        <label class="col-md-1" for="key">Key 2:</label>
+        <input class="col-md-2" />
+    </div>-->
+    <!--<div class="row" ng-controller="CacheSampleController as vm">
+        <div class="form-group">
+            <label class="label control-label" for="key">Key:</label>
+            <input class="input-sm" id="key" name="key" type="text"/>
+        </div>
+    </div>-->
+    </div>
+
+    <script src="../lib/jquery/dist/jquery.min.js"></script>
+    <script src="../lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../lib/angular/angular.js"></script>
+    <script src="../lib/angular-dynamic-locale/dist/tmhDynamicLocale.min.js"></script>    
+    <script src="../lib/angular-sanitize/angular-sanitize.min.js"></script>
+    <script src="../lib/angular-resource/angular-resource.min.js"></script>
+    <script src="../js/app.js"></script>
+    <script src="../js/controllers/CacheSampleController.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,102 @@
+﻿<div class="row">
+
+    <div class="container-fluid col-md-4 col-md-offset-4">
+
+        <h1 class="text-center">New Event</h1>
+
+        <br />
+        <form name="newEventForm">
+            <div class="form-group">
+                <label class="label control-label" for="eventName">Event Name:</label>
+                <input class="form-control input-sm" id="eventName" type="text" required ng-model="vm.event.name" placeholder="Name of your event..." />
+            </div>
+            <div class="form-group has-feedback">
+                <label class="label control-label" for="eventDate">Event Date:</label>
+                <!-- ng-pattern="/^(\d{2})\/(\d{2})\/(\d{4})$/"  -->
+                <input class="form-control input-sm" id="eventDate" name="eventDate" type="date" required ng-model="vm.event.date" ng-pattern="/^(\d{4})\-(\d{2})\-(\d{2})$/" placeholder="format (mm/dd/yyyy)..." />
+                <span class="text-warning" ng-show="newEventForm.eventDate.$error.pattern">Must be in format of MM/DD/YYYY</span>
+            </div>
+
+
+            <div class="form-group has-feedback">
+                <label class="label control-label" for="eventDateD">Event Date (D):</label>
+                <input class="form-control input-sm" id="eventDateD" name="eventDateD" required type="text" date-keys ng-model="vm.event.date1" placeholder="format (mm/dd/yyyy)..." />
+                <span class="text-warning" ng-show="newEventForm.eventDateD.$error.pattern">Must be in format of MM/DD/YYYY</span>
+            </div>
+
+
+
+
+            <div class="form-group">
+                <label class="label control-label" for="eventTime">Event Time:</label>
+                <input class="form-control input-sm" id="eventTime" type="text" required ng-model="vm.event.time" placeholder="start and end time..." />
+            </div>
+
+            <div class="form-group">
+                <label class="label control-label" for="eventLocation">Location:</label>
+                <input class="form-control input-sm" id="eventLocation" type="text" required ng-model="vm.event.location.address" placeholder="Address of event..." />
+            </div>
+
+            <div class="form-group" style="padding-bottom:30px;">
+                <input class="form-control input-sm pull-left" style="width:49%;" id="eventCity" type="text" required ng-model="vm.event.location.city" placeholder="City..." />
+                <input class="form-control input-sm pull-right" style="width:49%;" id="eventProvince" type="text" required ng-model="vm.event.location.province" placeholder="Province..." />
+            </div>
+
+            <p> selected item is : {{vm.selectedState1}} </p>
+            <div class="form-group" style="padding-bottom:30px;">
+                <select class="form-control input-sm pull-right" id="country1" required1 ng-model="vm.selectedState1">
+                    <option value="">Select</option>
+                    <option ng-repeat="item in vm.states" value="{{item.countryId}}">{{item.name}}</option>
+                </select>
+            </div>
+
+
+            <p> selected item is : {{vm.selectedState2.countryId}} </p>
+            <p> selected item is : {{vm.selectedState2.name}} </p>
+            <div class="form-group" style="padding-bottom:30px;">
+                <select class="form-control input-sm pull-right" id="country2" required1 ng-model="vm.selectedState2"
+                        ng-options="item.name for item in vm.states">
+                    <option value="">Select</option>
+                </select>
+            </div>
+
+            <p> selected item is : {{vm.selectedState3}} </p>
+            <div class="form-group" style="padding-bottom:30px;">
+                <select class="form-control input-sm pull-right" id="country3" required1 ng-model="vm.selectedState3"
+                        ng-options="item.countryId as item.name for item in vm.states">
+                    <option value="">Select</option>
+                </select>
+            </div>
+
+            <p> selected item is : {{vm.selectedState4.countryId}} </p>
+            <p> selected item is : {{vm.selectedState4.name}} </p>
+            <div class="form-group" style="padding-bottom:30px;">
+                <select class="form-control input-sm pull-right" id="country4" required1 ng-model="vm.selectedState4"
+                        ng-options="item.name for item in vm.states track by item.countryId">
+                    <option value="">Select</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label class="label control-label" for="eventImageUrl">Image:</label>
+                <input class="form-control input-sm" id="eventImageUrl" type="url" required1 ng-model="vm.event.imageUrl" placeholder="Url of image..." />
+            </div>
+
+            <!--
+                http://pickaface.net/includes/themes/clean/img/slide2.png
+
+                ng-disabled="newEventForm.$invalid"
+                -->
+            <img ng-src="{{vm.event.imageUrl}}" />
+
+            <br />
+            <br />
+
+            <div>
+                <a href="#" ng-click="vm.testApi()"> TEst</a>
+                <button type="button" ng-click="vm.cancelEvent()" class="btn btn-default pull-right">Cancel</button>
+                <button type="submit" ng-disabled="newEventForm.$invalid" ng-click="vm.saveEvent(vm.event, newEventForm)" class="btn btn-primary pull-right">Save</button>
+            </div>
+        </form>
+    </div>
+</div>

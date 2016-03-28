@@ -1,0 +1,104 @@
+﻿<div class="row container">
+    <div class="col-md-10 col-md-offset-1">
+        
+        <img ng-src="{{vm.event.imageUrl}}" alt="{{vm.event.name}}">
+        
+        <button class="btn btn-default" ng-click="vm.reload()">Reload</button>
+        <div class="row">
+            <div class="col-md-12" style="{{vm.event.divShowBorder ? vm.event.divBorder : ''}}">
+                <!--<h2>{{vm.event.name}}</h2>-->
+                <h2 ng-class="vm.myclass" ng-bind-template="{{vm.event.name | uppercase}} {{vm.event.date}} (Bind Template)"></h2>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-3" style="{{vm.event.divShowBorder ? vm.event.divBorder : ''}}">
+                <div>
+                    <label class="label label-default">Date:</label>
+                    <span class="text-left small">xt{{vm.toJsDate(vm.event.date) | date: 'mediumDate'}}</</span>
+                    /
+                    <span class="text-left small">{{vm.event.jsdate | date: 'MMMM dd, yyyy'}}</span>
+                </div>
+                <div>
+                    <label class="label label-default">Time:</label>
+                    <span class="text-left small">{{vm.event.time}}</span>
+                </div>
+                <div>
+                    <label class="label label-default">Price:</label>
+                    <span class="text-left small">{{34 | currency}}</span>
+                </div>
+            </div>
+            <div class="col-md-4" style="{{vm.event.divShowBorder ? vm.event.divBorder : ''}}">
+                <address>
+                    <label class="label label-warning">Address:</label>
+                    <div>
+                        <span class="text-left small">{{vm.event.location.address}}</span>
+                    </div>
+                    <div>
+                        <span class="text-left small">{{vm.event.location.city}}, {{vm.event.location.province}}</span>
+                    </div>
+                    <!--<strong>Address:</strong><br />
+                        {{vm.event.location.address}}<br />
+                        {{vm.event.location.city}}, {{vm.event.location.province}}
+                    -->
+                </address>
+            </div>
+        </div>
+
+        <hr />
+
+
+        <h3>Sessions</h3>
+
+        <div class="row form-horizontal">
+            <div class="form-group">
+                <label class="label control-label col-md-1" for="sortOrder2">Order By:</label>
+                <div class="form-group col-md-2">
+                    <select ng-model="vm.sortorder" class="form-control" id="sortOrder2">
+                        <option selected value="name">Name</option>
+                        <option value="-upVoteCount">Votes</option>
+                    </select>
+                </div>
+                <label class="label control-label col-md-1" for="query2">Show:</label>
+                <div class="form-group col-md-2">
+                    <select ng-model="vm.query.level" class="form-control" id="query2">
+                        <option selected value="">All</option>
+                        <option value="introductory">Introductory</option>
+                        <option value="intermediate">Intermediate</option>
+                        <option value="advanced">Advanced</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <ul class="thumbnails list-unstyled" style="{{vm.event.divShowBorder ? vm.event.divBorder : ''}}">
+            <li ng-repeat="session in vm.event.sessions | orderBy: vm.sortorder | filter: vm.query" id="session{{session.id}}" name="session{{session.id}}">
+                <div class="row session">
+                    <upvote up-vote="vm.upVoteSession(session)" down-vote="vm.downVoteSession(session)" vote-count="session.upVoteCount" />
+                    <!--<div class="col-xs-1 well votingWidget" style="width:40px;padding-top:0;padding-bottom:0;padding-left:10px;">
+
+                        <div class="votingButton" ng-click="vm.upVoteSession(session)" style="padding-top:0;">
+                            <i class="fa fa-chevron-up white"></i>
+                        </div>
+
+                        <div class="badge badge-inverse">
+                            <div>{{session.upVoteCount}}</div>
+                        </div>
+
+                        <div class="votingButton" ng-click="vm.downVoteSession(session)" style="padding-top:0;">
+                            <i class="fa fa-chevron-down"></i>
+                        </div>
+                    </div>-->
+                    <div class="col-md-9 well">
+                        <h4 class="well-title">{{session.name}}</h4>
+                        <h6 style="margin-top:-10px;">{{session.creatorName}}</h6>
+                        <span>Duration: {{session.duration | durations }}</span><br />
+                        <span>Level: {{session.level}}</span>
+                        <p>{{session.abstract}}</p>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

@@ -96,12 +96,14 @@
                             <label class="label control-label" for="eventName">Event Name:</label>
                             <input class="form-control input-sm" id="eventName" type="text" required ng-model="vm.event.name" placeholder="Name of your event..." />
                         </div>
+
                         <div class="form-group has-feedback">
                             <label class="label control-label" for="eventDate">Event Date:</label>
                             <!-- ng-pattern="/^(\d{2})\/(\d{2})\/(\d{4})$/"  -->
                             <input class="form-control input-sm" id="eventDate" name="eventDate" type="date" required ng-model="vm.event.date" ng-pattern="/^(\d{4})\-(\d{2})\-(\d{2})$/" placeholder="format (mm/dd/yyyy)..." />
                             <span class="text-warning" ng-show="newEventForm.eventDate.$error.pattern">Must be in format of MM/DD/YYYY</span>
                         </div>
+
                         <div class="form-group">
                             <label class="label control-label" for="eventTime">Event Time:</label>
                             <input class="form-control input-sm" id="eventTime" type="text" required ng-model="vm.event.time" placeholder="start and end time..." />
@@ -222,6 +224,7 @@
     <script src="../lib/angular-dynamic-locale/dist/tmhDynamicLocale.min.js"></script>    
     <script src="../lib/angular-sanitize/angular-sanitize.min.js"></script>
     <script src="../lib/angular-resource/angular-resource.min.js"></script>
+    <script src="../lib/angular-cookies/angular-cookies.min.js"></script>
 
     <!--<script src="../lib/angular-aria/angular-aria.min.js"></script>
     <script src="../lib/angular-animate/angular-animate.min.js"></script>

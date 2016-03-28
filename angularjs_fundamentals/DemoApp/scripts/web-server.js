@@ -6,21 +6,26 @@ var app = express();
 
 var rootPath = path.normalize(__dirname + '/../');
 
-var options = {
-    index: "views/EventDetails.html"
-};
+//var options = {
+//    index: "views/index.html"
+//};
 
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
-app.use(express.static(rootPath + '/app', options));
+//app.use(express.static(rootPath + '/app', options));
+app.use(express.static(rootPath + "/app"));
 
 //app.use(express.static(rootPath + '/app'));
 //var server = app.listen(8000);
 
 
+app.get("/data/event", events.getAll);
 app.get("/data/event/:id", events.get);
 app.post("/data/event/:id", events.save);
+
+//needed for routing in html5 mode
+app.get('*', function (req, res) { res.sendFile(rootPath + '/app/index.html'); });
 
 
 

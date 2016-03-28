@@ -1,0 +1,25 @@
+﻿<a class="link-unstyled" href="event/{{event.id}}">
+    <div class="thumbnail well hoverwell">
+        <div class="row">
+            <h2 class="col-md-11">
+                {{event.name}}
+            </h2>
+        </div>
+        <div class="row">
+            <span class="col-md-1">Date:</span>
+            <span class="col-md-8 col-md-push-1">{{event.date}}</span>
+        </div>
+        <div class="row">
+            <span class="col-md-1">Time:</span>
+            <span class="col-md-8 col-md-push-1">{{event.time}}</span>
+        </div>
+        <div class="row">
+            <span class="col-md-1">Location:</span>
+            <span class="col-md-8 col-md-push-1">{{event.location.address}}</span>
+        </div>
+        <div class="row">
+            <span class="col-md-1">&nbsp;</span>
+            <span class="col-md-8 col-md-push-1">{{event.location.city}}, {{event.location.province}}</span>
+        </div>
+    </div>
+</a>

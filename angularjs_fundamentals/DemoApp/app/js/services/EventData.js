@@ -17,7 +17,12 @@
             getEvent1: getEvent1,
             getEvent2: getEvent2,
             getEvent3: getEvent3,
-            save: saveEvent
+            save: saveEvent,
+            getAllEvents: getAllEvents
+        };
+
+        function getAllEvents() {
+            return resource.query();
         };
 
         function saveEvent(event) {
@@ -25,9 +30,8 @@
             return resource.save(event);
         };
 
-        function getEvent3() {
-
-            return resource.get({ id: 1 });
+        function getEvent3(eventId) {
+            return resource.get({ id: eventId });
             //return $resource("/data/event/:id", {id:"@id"}).get({id:1});
         };
         ///////////////////////////////////////////////

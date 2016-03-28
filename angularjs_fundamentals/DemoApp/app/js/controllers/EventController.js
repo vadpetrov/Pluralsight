@@ -6,11 +6,17 @@
     module.controller("EventController", EventController);   
     
 
-    function EventController($scope, $sce, eventData, $log, $anchorScroll) {
+    function EventController($scope, $sce, eventData, $log, $anchorScroll, $routeParams, $route) {
 
         var vm = this;
 
         vm.trips = [{}];
+
+        vm.reload = function () {
+            $route.reload();
+        };
+
+
         //vm.event = null;
 
 
@@ -30,7 +36,13 @@
         //    console.log(error);
         //});
 
-        eventData.getEvent3()
+        console.log($route.current.params.eventId);//route param (params include all params
+        console.log($route.current.pathParams.eventId);//route param (pathParams include only route params
+        console.log($route.current.foo);//custom route template attributes
+        console.log($route.current.params.foo1);//Querystring parrams
+
+        /*/
+        eventData.getEvent3($routeParams.eventId)
         .$promise.then(function (event) {
                 vm.event = event;
                 console.log(event);
@@ -43,8 +55,8 @@
         .finally(function () {
            console.log("Get events call: END");
         });
-
-
+        */
+        vm.event = $route.current.locals.event;
 
 
         

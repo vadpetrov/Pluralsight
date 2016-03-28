@@ -1,0 +1,50 @@
+<div class="row container">
+    <div class="col-md-10 col-md-offset-1">
+        <h1>Events</h1>
+        <hr />
+        <hr />
+        <!--
+        http://stackoverflow.com/questions/18939958/bootstrap3-thumbnail-grid    
+        -->
+        <ul class="list-unstyled">
+            <li class="col-md-6" ng-repeat="event in events|orderBy:sortorder">
+                <!--without  binding-->
+                <!--<event-thumbnail/>-->
+
+                <!--with binding-->
+                <!--<event-thumbnail th-item="event" />-->
+                <event-thumbnail event="event" />
+
+
+
+
+                <!--<a class="link-unstyled" href="#/event/{{event.id}}">-->
+                <!--<a class="link-unstyled" href="event/{{event.id}}">
+                    <div class="thumbnail well hoverwell">
+                        <div class="row">
+                            <h2 class="col-md-11">
+                                {{event.name}}
+                            </h2>
+                        </div>
+                        <div class="row">
+                            <span class="col-md-1">Date:</span>
+                            <span class="col-md-8 col-md-push-1">{{event.date}}</span>
+                        </div>
+                        <div class="row">
+                            <span class="col-md-1">Time:</span>
+                            <span class="col-md-8 col-md-push-1">{{event.time}}</span>
+                        </div>
+                        <div class="row">
+                            <span class="col-md-1">Location:</span>
+                            <span class="col-md-8 col-md-push-1">{{event.location.address}}</span>
+                        </div>
+                        <div class="row">
+                            <span class="col-md-1">&nbsp;</span>
+                            <span class="col-md-8 col-md-push-1">{{event.location.city}}, {{event.location.province}}</span>
+                        </div>
+                    </div>
+                </a>-->
+            </li>
+        </ul>
+    </div>
+</div>

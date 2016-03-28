@@ -3,6 +3,12 @@
 .well-title {
   margin-top: 0;
 }
+
+.hoverwell:hover {
+  background-color: #52575c;
+  cursor: pointer;
+}
+
 .session {
     -webkit-touch-callout: none;
     -webkit-user-select: none;    
@@ -64,4 +70,19 @@
 
     display:none;
 
+}
+
+.link-unstyled {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+.link-unstyled:link {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+.link-unstyled:hover {
+  color: inherit;
+  text-decoration: inherit;
 }

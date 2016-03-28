@@ -33,7 +33,9 @@
 
         $scope.myDate = Date.now();
         $scope.myFormat = $locale.DATETIME_FORMATS.fullDate;
-                
+
+        //exceptionHandler example
+        //throw { message: "error message" };
 
         //tmhDynamicLocale.set("en");
         //$scope.$on("$localeChangeSuccess", function () {

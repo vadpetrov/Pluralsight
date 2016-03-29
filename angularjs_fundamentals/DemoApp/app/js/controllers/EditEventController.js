@@ -22,15 +22,6 @@
         vm.selectedState3 = 3;
         vm.selectedState4 = vm.states[1];
 
-
-
-
-
-
-
-
-
-
         vm.testApi = Test;
 
         function Test()

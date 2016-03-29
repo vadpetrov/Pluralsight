@@ -27,13 +27,20 @@
 
     function appRouting($routeProvider, $locationProvider) {
 
+        $routeProvider.caseInsensitiveMatch = false;//default
+
         $routeProvider
-        .when("/",{
+        .when("/", {
             template: "Application Base"
+        })
+        .when("/editProfile", {
+            templateUrl: "templates/EditProfile.html",
+            contoroller: "EditProfileController",
+            controllerAs: "vm"
         })
         .when("/newEvent", {
             templateUrl: "templates/NewEvent.html",
-            contoroller: "EditEventController",
+            controller: "EditEventController",
             controllerAs: "vm"
         })
         .when("/events", {
@@ -46,7 +53,7 @@
             controllerAs: "vm",
             foo: "bar",
             resolve: {//delay page loading until server data is loaded. handle slow loading pages
-                event: function ($route, eventData) {                    
+                event: function ($route, eventData) {
                     return eventData.getEvent3($route.current.pathParams.eventId).$promise;
                 }
             }
@@ -56,6 +63,14 @@
                 templateUrl: 'templates/SampleDirective.html',
                 controller: 'SampleDirectiveController'
             })
+        .when("/404", {
+            template: "<div></div>",
+            resolve: {
+                check: function ($location) {
+                    window.location.href = "/";
+                }
+            }
+        })
         .otherwise({ redirectTo: "/" });
 
 

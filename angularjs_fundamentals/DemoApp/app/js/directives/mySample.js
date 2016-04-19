@@ -3,7 +3,7 @@
 
     var eventsApp = angular.module("eventsApp");
 
-    console.log("here");
+    //console.log("here");
 
     eventsApp.directive("mySample", function ($compile) {
 
@@ -31,4 +31,26 @@
 
     });
 
+}());
+
+(function () {
+
+    "use strict";
+
+    var eventsApp = angular.module("eventsApp");
+    eventsApp.directive("redirectTo", redirectTo);
+
+
+    function redirectTo($window) {
+        return {
+            restrict: 'A',
+            link: function (scope, element, attributes) {
+                element.bind("click", function (event) {  
+                    $window.location.href = attributes.redirectTo;
+                });
+            }
+        };
+    }    
+    //inject $window service for redirection
+    //redirectTo.$inject = ['$window'];
 }());

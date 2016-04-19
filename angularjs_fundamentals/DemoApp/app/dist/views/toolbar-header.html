@@ -1,0 +1,43 @@
+﻿<!--
+https://material.angularjs.org/latest/demo/toolbar
+https://klarsys.github.io/angular-material-icons/
+https://material.angularjs.org/latest/Theming/03_configuring_a_theme
+-->
+<md-toolbar>
+    <div class="md-toolbar-tools">
+
+        <md-button hide-gt-sm class="md-icon-button" ng-click="vm.toggleSideNav()"  aria-label="Toggle side navigation">
+            <!--<md-icon md-svg-icon="/svg/menu.svg"></md-icon>-->
+            <!--Icon configured in boot.ts-->
+            <md-icon md-svg-icon="menu"></md-icon>
+        </md-button>
+
+        <h1>
+            Contact Manager
+        </h1>
+
+        <md-fab-speed-dial md-direction="down" class="md-fling md-fab-top-right">
+
+            <md-fab-trigger>
+                <md-button class="md-fab"  aria-label="Contact menu options">
+                    <md-icon md-svg-icon="menu"></md-icon>
+                </md-button>
+            </md-fab-trigger>
+
+            <md-fab-actions>
+
+                <md-button class="md-fab md-raised md-mini" ng-click="vm.showContactOptions($event)">
+                    <ng-md-icon icon="face"></ng-md-icon>
+                    <md-tooltip md-direction="left">Contact</md-tooltip>
+                </md-button>
+
+                <md-button class="md-fab md-raised md-mini" ng-click="vm.clearNotes($event)">
+                    <ng-md-icon icon="clear_all"></ng-md-icon>
+                    <md-tooltip md-direction="left">Clear all notes</md-tooltip>
+                </md-button>
+
+            </md-fab-actions>
+        </md-fab-speed-dial>
+
+    </div>
+</md-toolbar>

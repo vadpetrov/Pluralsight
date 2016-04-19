@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html>
+<html lang="en" ng-app="contactManagerApp">
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,500,700,400italic" />
+    <link rel="stylesheet" href="../lib/angular-material/angular-material.min.css" />
+    <link rel="stylesheet" href="../lib/angular-material-icons/angular-material-icons.css" />
+
+    <link rel="stylesheet" href="../css/app1.css" />
+
+    <style type="text/css">
+        [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+            display: none !important;
+        }
+    </style>
+
+</head>
+<body layout="row" ng-cloak ng-controller="mainController as vm">
+
+    <!--<div flex="30" style="background-color: #009688">
+        Side navigation
+    </div>-->
+    <div ng-include="'/dist/views/sidenav.html'" layout="vertical"></div>
+
+
+    <div layout="column" flex id="wrapper">
+        <div ng-include="'/dist/views/toolbar-header.html'"></div>
+
+        <md-content flex id="content">
+
+            <div ng-include="'/dist/views/main-content.html'"></div>
+
+            <md-tabs md-selected="vm.tabIndex"
+                     md-dynamic-height=""
+                     md-stretch-tabs="always">
+
+                <md-tab label="Bio">
+                    <div ng-include="'/dist/views/tab-bio.html'"></div>
+                </md-tab>
+                <md-tab label="Notes">
+                    <div ng-include="'/dist/views/tab-notes.html'"></div>
+                </md-tab>
+            </md-tabs>
+
+        </md-content>
+    </div>
+
+
+    <!--
+    <div layout="row" layout-xs="column">
+        <div flex style="background-color: #009688">First item in row</div>
+        <div flex style="background-color: #3939ab">Second item in row</div>
+    </div>
+
+    <div layout="column">
+        <div flex style="background-color: #009688">First item in column</div>
+        <div flex style="background-color: #3939ab">Second item in column</div>
+    </div>
+
+    <div layout="row">
+        <div layout="row" flex="30">
+            <div flex style="background-color: #009688">First item in row</div>
+            <div flex style="background-color: #3939ab">Second item in row</div>
+        </div>
+
+        <div layout="column" flex>
+            <div flex style="background-color: #009688">First item in column</div>
+            <div flex style="background-color: #3939ab">Second item in column</div>
+        </div>
+    </div>
+    -->
+
+
+    <script src="../lib/angular/angular.js"></script>
+    <script src="../lib/angular-animate/angular-animate.js"></script>
+    <script src="../lib/angular-aria/angular-aria.js"></script>
+    <script src="../lib/angular-material/angular-material.js"></script>
+    <script src="../lib/angular-messages/angular-messages.js"></script>
+    <script src="../lib/angular-material-icons/angular-material-icons.js"></script>
+
+
+    <script src="../dist/models.js"></script>
+    <script src="../dist/services/userService.js"></script>
+    <script src="../dist/controllers/addUserDialogController.js"></script>
+    <script src="../dist/controllers/contactPanelController.js"></script>
+    <script src="../dist/controllers/mainController.js"></script>
+        
+    <script src="../dist/boot.js"></script>
+</body>
+</html>

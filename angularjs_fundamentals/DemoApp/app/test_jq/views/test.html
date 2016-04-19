@@ -1,0 +1,154 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Test place</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+
+    <!--<link rel="stylesheet" href="../lib/bootstrap/dist/css/bootstrap.css" />-->
+    <link rel="stylesheet" href="/lib/bootswatch/slate/bootstrap.css" />
+    <link rel="stylesheet" href="/lib/fontawesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="/lib/jqueri-ui/themes/base/jquery-ui.css" />
+    <link rel="stylesheet" href="../css/app.css" />
+    <script type="text/javascript">
+        function openPicker1(type) {
+
+            var dialogId = _.uniqueId("picker-single-");
+            $(document.body).append('<div class="row" id="' + dialogId + '"></div>');
+
+            var dialogContainer = $("#" + dialogId);
+
+            dialogContainer.dialog({
+                autoOpen: false,
+                modal: true,
+                draggable: true,
+                resizable: false,
+                closeOnEscape: false,
+                title: "Picker:" + type,
+                height: "auto",
+                width: 600,
+                show:{
+                    effect:"puff",
+                    duration:300
+                },
+                hide:{
+                    effect:"slide",
+                    duration: 300,
+                    direction:"down"
+                },
+                buttons: {
+                    'Save': function (evt) {
+
+                        // get DOM element for button
+                        var buttonDomElement = evt.target;
+                        // Disable the button
+                        $(buttonDomElement).attr('disabled', true);
+
+                        $('form').submit();
+                    },
+                    'Cancel': function () {
+                        $(document.body).remove(dialogId);
+                        //$(this).dialog('close');
+                        dialogContainer.dialog("close");
+                        //dialogContainer.dialog("destroy");
+                    }
+                }
+            });
+
+
+            //var data = {};
+            //data.Id = "1";
+            //data.Name = "XXX";
+
+            //alert(data.Name);
+
+            //$("#edit-popup").html($("#edit-template").render(data));
+            dialogContainer.load("picker-view.html");
+            dialogContainer.dialog("open");
+           
+        };
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <h1>JQ Test</h1>
+
+            <button type="button" class="btn btn-info" onclick="openPicker('DEAL');">JS Modal</button>
+            <button type="button" class="btn btn-info" onclick="openPicker1('DEAL');">JS Modal 1</button>
+            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#picker-modal" pickertype="DEAL">BS Modal</button>
+
+        </div>
+    </div>
+
+
+
+    <div id="myModal" class="fc-modal">        
+        <div class="fc-modal-content">
+            <div class="fc-modal-header">
+                <span class="fc-close">×</span>
+                <h2>Modal Header</h2>
+            </div>
+            <div class="fc-modal-body">
+                <p>Some text in the Modal Body</p>
+                <p>Some other text...</p>
+            </div>
+            <div class="fc-modal-footer">
+                <h3>Modal Footer</h3>
+                <button type="button" class="btn btn-info" onclick="openPicker('DEAL');">Open Picker</button>
+            </div>
+        </div>      
+    </div>
+
+    <div id="picker-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                </div>
+                <div class="modal-body edit-content">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="dialog-modal1" title="Basic modal dialog" style="display:none;">
+        <p>Adding the modal overlay screen makes the dialog look more prominent because it dims out the page content.</p>
+    </div>
+
+
+    <script src="/lib/underscore/underscore-min.js"></script>
+    <script src="/lib/jquery/dist/jquery.js"></script>
+    <script src="/lib/jqueri-ui/jquery-ui.js"></script>
+    <script src="/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../js/boot.js"></script>
+    <script>
+        $('#picker-modal').on('show.bs.modal', function(e) {
+
+            var $modal = $(this);
+            var pickertype = $(e.relatedTarget).attr("pickertype");
+
+//            $.ajax({
+//                cache: false,
+//                type: 'POST',
+//                url: 'backend.php',
+//                data: 'EID='+essay_id,
+//                success: function(data)
+//                {
+            $modal.find('.edit-content').html(pickertype);
+//                }
+//            });
+
+        })
+    </script>
+</body>
+</html>

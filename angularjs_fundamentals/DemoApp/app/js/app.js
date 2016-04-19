@@ -63,6 +63,19 @@
                 templateUrl: 'templates/SampleDirective.html',
                 controller: 'SampleDirectiveController'
             })
+
+        .when("/angMat1", {
+            template: "loading...",
+            controller: function ($location, $window) {
+                //window.location.replace("/11");
+                //window.location.href = "/views/index1.html";
+                //$location.path('http://www.google.com').replace();
+                //$location.absUrl() == 'http://www.google.com'
+                //$location.path() == '/a'
+                $window.location.href = "/views/index1.html";
+                //$window.location.reload();
+            }
+        })
         .when("/404", {
             template: "<div></div>",
             resolve: {
@@ -70,12 +83,17 @@
                     window.location.href = "/";
                 }
             }
-        })
-        .otherwise({ redirectTo: "/" });
+        });
+        //.otherwise({ redirectTo: "/" });
 
 
         //use routeProvider without # sign in url
         $locationProvider.html5Mode(true);
+
+        //$locationProvider.html5Mode({
+        //    enabled: true,
+        //    rewriteLinks: false
+        //});
 
 
         //$locationProvider.html5Mode({

@@ -32,18 +32,35 @@
                     <ul class="nav navbar-nav">
                         <!--<li><a href="#/events">Events</a></li>-->
                         <li><a href="events">Events</a></li>                        
-                    </ul>
-                    <ul class="nav navbar-nav">
+             
                         <!--<li><a href="#/newEvent">Create Event</a></li>-->
                         <!--<li><a href="newEvent">Create Event</a></li>-->
-                        <li><a href="#" ng-click="createEvent()">Create Event</a></li>
-                    </ul>
-                    <ul class="nav navbar-nav">                        
-                        <li><a href="sampleDirective">Sample Directive</a></li>
-                    </ul>
-                    <ul class="nav navbar-nav">
+                        <li><a href="#" ng-click="createEvent()">Create Event</a></li>             
+                        <li><a href="sampleDirective">Sample Directive</a></li>                    
                         <li><a href="editProfile">Edit Profile</a></li>
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Angular Material <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="angMat1">Example 1</a></li>
+                                <li><a redirect-to="../views/index1.html" style="cursor:pointer">Redirect to Material</a></li>
+                                <li><a redirect-to="events" style="cursor:pointer">Redirect to Events</a></li>
+                                <li><a href="../views/index1.html" target="_self">Example LINK</a></li>                                
+                                <li role="separator" class="divider"></li>
+                                <li><a redirect-to="./test_ang/views/test.html" style="cursor:pointer">Test Angular</a></li>
+                                <li><a redirect-to="./test_ang_1/views/test.html" style="cursor:pointer">Test Angular New</a></li>
+                                <li><a redirect-to="./test_ang_mat/views/test.html" style="cursor:pointer">Test Angular Material</a></li>
+                                <li><a redirect-to="./test_jq/views/test.html" style="cursor:pointer">Test JQuery</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#">One more separated link</a></li>
+                            </ul>
+                        </li>
                     </ul>
+
+                    <!--<ul class="nav navbar-nav navbar-right">
+                    
+                    </ul>-->
+
                 </div>
             </div>
         </nav>
@@ -53,18 +70,18 @@
     <!--<ng-view></ng-view>-->
     
 
-    <script src="/lib/jquery/dist/jquery.min.js"></script>
-    <script src="/lib/jqueri-ui/jquery-ui.min.js"></script>
-    <script src="/lib/underscore/underscore-min.js"></script>
-    <script src="/lib/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="/lib/angular/angular.js"></script>
-    <script src="/lib/angular-route/angular-route.min.js"></script>
-    <script src="/lib/angular-dynamic-locale/dist/tmhDynamicLocale.min.js"></script>
-    <script src="/lib/angular-sanitize/angular-sanitize.min.js"></script>
-    <script src="/lib/angular-resource/angular-resource.min.js"></script>
-    <script src="/lib/angular-cookies/angular-cookies.min.js"></script>
-    <script src="/js/app.js"></script>
-    <script src="/js/filters.js"></script>
+    <script src="./lib/jquery/dist/jquery.min.js"></script>
+    <script src="./lib/jqueri-ui/jquery-ui.min.js"></script>
+    <script src="./lib/underscore/underscore-min.js"></script>
+    <script src="./lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="./lib/angular/angular.min.js"></script>
+    <script src="./lib/angular-route/angular-route.min.js"></script>
+    <script src="./lib/angular-dynamic-locale/dist/tmhDynamicLocale.min.js"></script>
+    <script src="./lib/angular-sanitize/angular-sanitize.min.js"></script>
+    <script src="./lib/angular-resource/angular-resource.min.js"></script>
+    <script src="./lib/angular-cookies/angular-cookies.min.js"></script>
+    <script src="./js/app.js"></script>
+    <script src="./js/filters.js"></script>
 
     <!--<script type="text/javascript">
         var scriptEl = document.createElement('SCRIPT');
